@@ -12,8 +12,8 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - kousiki-app',
-    title: 'kousiki-app',
+    titleTemplate: '%s - frontend',
+    title: 'frontend',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

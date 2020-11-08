@@ -1,16 +1,15 @@
 <template>
-  <v-app>
-    
-  </v-app>
+  <v-app> aaa </v-app>
 </template>
 
 <script>
 export default {
-  data(){
+  data() {
+    console.log("a");
     return {
-      posts: []
-    }
-  }
+      posts: [],
+    };
+  },
 };
 </script>
 

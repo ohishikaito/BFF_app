@@ -1,4 +1,4 @@
-# kousiki-app
+# frontend
 
 ## Build Setup
 
