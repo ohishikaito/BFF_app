@@ -4,7 +4,7 @@
     <div>
       <input type="text" v-model="post.name" />
     </div>
-    <button @click="onClickUpdate">登録する</button>
+    <button @click="onClickUpdate">更新する</button>
   </div>
 </template>
 
@@ -13,7 +13,6 @@ export default {
   async asyncData(ctx) {
     try {
       const response = await ctx.$axios.get(`/posts/${ctx.route.params.id}`);
-      console.log(response);
       return {
         post: response.data
       };
@@ -24,11 +23,10 @@ export default {
   methods: {
     async onClickUpdate() {
       try {
-        const response = await this.$axios.post("/posts", this.post);
-        console.log(response);
-        this.$router.push(`/posts/${ctx.route.params.id}`);
+        const response = await this.$axios.put(`/posts/${this.post.id}`, this.post)
+        this.$router.push(`/posts/${this.post.id}`);
       } catch (error) {
-        console.error(error.response);
+        console.error(error.response, 4);
       }
     }
   }

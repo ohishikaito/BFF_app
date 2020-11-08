@@ -30,12 +30,12 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   // ポート変更
   server: {
-    port: 8000, // デフォルト: 3000
+    port: 3003, // デフォルト: 3000
     host: "0.0.0.0" // デフォルト: localhost
   },
   modules: ["@nuxtjs/axios"],
   axios: {
-    baseURL: "http://localhost:8001/api"
+    baseURL: "http://localhost:3004/api"
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

@@ -7,10 +7,11 @@ class Api::PostsController < ApplicationController
 
   def create
     post = Post.new(post_params)
+    # binding.pry
     if post.save
       render json: post, status: :created
     else
-      render json: product.errors, status: :unprocessable_entity
+      render json: post.errors, status: :unprocessable_entity
     end
   end
 
@@ -21,16 +22,22 @@ class Api::PostsController < ApplicationController
 
   def update
     post = Post.find(params[:id])
-    if post.save(post_params)
-      render json: post, status: :created
-    else
-      render json: product.errors, status: :unprocessable_entity
-    end
+    # binding.pry
+    post.update(post_params)
+    render json: post, status: :ok
   end
+
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+    render json: post, status: :ok
+  end
+  
 
   private
     def post_params
-      params.require(:post).permit(:name)
+      # params.require(:post).permit(:name)
+      params.permit(:name, :id)
     end
 
 end

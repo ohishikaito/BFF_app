@@ -7,7 +7,8 @@
         <div>name: {{ post.name }}</div>
       </li>
     </ul>
-    <button @click="onCilckEdit">編集する</button>
+    <button @click="onClickEdit">編集する</button>
+    <button @click="onClickDestroy">削除</button>
   </div>
 </template>
 
@@ -26,8 +27,16 @@ export default {
   },
   methods: {
     onClickEdit() {
-      this.$router.push(`/posts/${ctx.route.params.id}/edit`);
+      this.$router.push(`/posts/${this.post.id}/edit`);
+    },
+    async onClickDestroy(){
+      try {
+        const response = await this.$axios.delete(`/posts/${this.post.id}`)
+        this.$router.push(`/`);
+      } catch (error) {
+        console.error(error.response);
+      }
     }
-  }
+  },
 };
 </script>
