@@ -1,19 +1,39 @@
 <template>
-  <div>あ</div>
+  <div>
+    <h1>投稿一覧</h1>
+    <ul v-for="post in posts" :key="post.id">
+      <div>
+        <div>{{ post.id }}</div>
+        <div>{{ post.name }}</div>
+        <button @click="onClickShow(post.id)">詳細へ</button>
+      </div>
+    </ul>
+    <div>
+      <button @click="onClickNew">投稿ページへ</button>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  async asyncData({ $axios }) {
-    // 取得先のURL
-    const url = "https://qiita.com/api/v2/items";
-    // リクエスト（Get）
-    const response = await $axios.$get(url);
-    console.log(response);
-    // 配列で返ってくるのでJSONにして返却
-    return {
-      posts: response
-    };
+  async asyncData(ctx) {
+    try {
+      const response = await ctx.$axios.get("/posts");
+      console.log(response);
+      return {
+        posts: response.data
+      };
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  methods: {
+    onClickNew() {
+      this.$router.push("/posts/new");
+    },
+    onClickShow(postId) {
+      this.$router.push(`/posts/${postId}`);
+    }
   }
 };
 </script>

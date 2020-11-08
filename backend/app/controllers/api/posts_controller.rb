@@ -5,11 +5,24 @@ class Api::PostsController < ApplicationController
     render json: posts, status: :ok
   end
 
-  def def create
+  def create
     post = Post.new(post_params)
     if post.save
       render json: post, status: :created
-      # render json: post, serializer: PostSerializer, status: :created
+    else
+      render json: product.errors, status: :unprocessable_entity
+    end
+  end
+
+  def show
+    post = Post.find(params[:id])
+    render json: post, status: :ok
+  end
+
+  def update
+    post = Post.find(params[:id])
+    if post.save(post_params)
+      render json: post, status: :created
     else
       render json: product.errors, status: :unprocessable_entity
     end

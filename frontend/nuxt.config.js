@@ -17,7 +17,9 @@ export default {
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
+  plugins: [
+    "plugins/axios" // 追加
+  ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -32,6 +34,9 @@ export default {
     host: "0.0.0.0" // デフォルト: localhost
   },
   modules: ["@nuxtjs/axios"],
+  axios: {
+    baseURL: "http://localhost:8001/api"
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {}
