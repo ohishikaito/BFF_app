@@ -1,20 +1,24 @@
-<!-- Issue 番号がない PR は受け付けません。 -->
-<!-- We don't accept PRs which has no Issue ID. -->
+## issue-XXX
+issueURLをコピペ
 
-## 👏 解決する issue / Resolved Issues
-- close #0
-- close #0
+### 改修内容
+- 例）フォームを改修しました。
 
-## 📝 関連する issue / Related Issues
-- #0
-- #0
+### 要確認事項
+- [ ] 例）フォームのデザインに問題がないか、確認をお願いいたします。
 
-## ⛏ 変更内容 / Details of Changes
-<!-- 変更を端的に箇条書きで -->
-<!-- List down your changes concisely -->
-- xxxxxx
-- xxx
+### 動作確認の方法
+- 例）商品を登録してから、一覧画面でご確認ください。
 
-## 📸 スクリーンショット / Screenshots
-<!-- スタイルなどの変更の場合はスクリーンショットがあるとレビューしやすいです -->
-<!-- Changes in styles would be easier to review with screenshots! -->
+### テストケース
+
+### スクショ等
+
+### その他備考
+
+#### プルリク運用ルール
+- 基本PR作成者がマージ。
+- 作業中のPRの場合はタイトル先頭に `WIP:` をつける。
+- レビュー待ちは `Waiting Review` ラベルとレビュワーを指定する。
+- レビューOKなら `LGTM` ラベルをつけること。
+- 基本マージ後はブランチを削除。
