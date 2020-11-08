@@ -1,5 +1,5 @@
 <template>
-  <v-app> aaa </v-app>
+  <v-app> あ </v-app>
 </template>
 
 <script>
@@ -10,8 +10,11 @@ export default {
       posts: [],
     };
   },
+  async asyncData({ app }) {
+    const res = await app.$axios.$get("http://www.example.com");
+    return { axios_data: res };
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>
