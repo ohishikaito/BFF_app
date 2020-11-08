@@ -10,10 +10,7 @@ export default {
       posts: [],
     };
   },
-  async asyncData({ app }) {
-    const res = await app.$axios.$get("http://www.example.com");
-    return { axios_data: res };
-  },
+  async asyncData({ app }) {},
 };
 </script>
 
