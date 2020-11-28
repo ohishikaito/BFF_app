@@ -13,20 +13,20 @@ export default {
   data() {
     return {
       post: {
-        name: ""
-      }
-    };
+        name: '',
+      },
+    }
   },
   methods: {
     async onClickCreate() {
       try {
-        const response = await this.$axios.post("/posts", { post: this.post });
-        console.log(response);
-        this.$router.push("/");
+        const response = await this.$axios.post('/posts', { post: this.post })
+        console.log(response)
+        this.$router.push('/')
       } catch (error) {
-        console.error(error.response);
+        console.error(error.response)
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>

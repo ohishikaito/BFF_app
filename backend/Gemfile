@@ -49,3 +49,9 @@ gem 'active_model_serializers'
 
 # graphQL
 gem "graphql"
+
+# 論理削除
+gem 'paranoia'
+
+# モデルにカラムを表示
+gem 'annotate'

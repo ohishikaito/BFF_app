@@ -3,17 +3,17 @@
 </template>
 
 <script>
-import testField from '~/apollo/gqls/queries/testField';
+import testField from '~/apollo/gqls/queries/testField'
 export default {
   data() {
     return {
-      testField: {}
+      testField: {},
     }
   },
   apollo: {
     testField: {
-      query: testField
-    }
-  }
+      query: testField,
+    },
+  },
 }
 </script>
