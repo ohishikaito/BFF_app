@@ -33,9 +33,17 @@ export default {
     port: 3003, // デフォルト: 3000
     host: "0.0.0.0" // デフォルト: localhost
   },
-  modules: ["@nuxtjs/axios"],
+  modules: [
+    "@nuxtjs/axios",
+    "@nuxtjs/apollo",
+  ],
   axios: {
     baseURL: "http://localhost:3004/api"
+  },
+  apollo: {
+    clientConfigs: {
+      default: '~/apollo/client-configs/default.js'
+    }
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
