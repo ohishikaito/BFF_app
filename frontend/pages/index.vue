@@ -18,22 +18,22 @@
 export default {
   async asyncData(ctx) {
     try {
-      const response = await ctx.$axios.get("/posts");
-      console.log(response);
+      const response = await ctx.$axios.get('/posts')
+      console.log(response)
       return {
-        posts: response.data
-      };
+        posts: response.data,
+      }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   },
   methods: {
     onClickNew() {
-      this.$router.push("/posts/new");
+      this.$router.push('/posts/new')
     },
     onClickShow(postId) {
-      this.$router.push(`/posts/${postId}`);
-    }
-  }
-};
+      this.$router.push(`/posts/${postId}`)
+    },
+  },
+}
 </script>

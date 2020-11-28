@@ -1,17 +1,8 @@
 class Api::PostsController < ApplicationController
 
   def index
-    # posts = Post.all
-    # render json: posts, status: :ok
     posts = Post.all
-    render json: {
-      data: posts.map do |post|
-        {
-          id: post.id,
-          name: post.name
-        }
-      end,
-    }
+    render json: posts, status: :ok
   end
 
   def create

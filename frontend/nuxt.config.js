@@ -4,13 +4,13 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: "frontend",
+    title: 'frontend',
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" }
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: '' },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
@@ -18,7 +18,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    "plugins/axios" // 追加
+    'plugins/axios', // 追加
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -31,21 +31,18 @@ export default {
   // ポート変更
   server: {
     port: 3003, // デフォルト: 3000
-    host: "0.0.0.0" // デフォルト: localhost
+    host: '0.0.0.0', // デフォルト: localhost
   },
-  modules: [
-    "@nuxtjs/axios",
-    "@nuxtjs/apollo",
-  ],
+  modules: ['@nuxtjs/axios', '@nuxtjs/apollo'],
   axios: {
-    baseURL: "http://localhost:3004/api"
+    baseURL: 'http://localhost:3004/api',
   },
   apollo: {
     clientConfigs: {
-      default: '~/apollo/client-configs/default.js'
-    }
+      default: '~/apollo/client-configs/default.js',
+    },
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {}
-};
+  build: {},
+}
