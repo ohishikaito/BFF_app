@@ -32,12 +32,13 @@ class Api::PostsController < ApplicationController
     post.destroy
     render json: post, status: :ok
   end
-  
+
 
   private
     def post_params
       # params.require(:post).permit(:name)
-      params.permit(:name, :id)
+      # params.permit(:name, :id)
+      params.require(:post).permit(:name, :id)
     end
 
 end

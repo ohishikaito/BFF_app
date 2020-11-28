@@ -20,7 +20,7 @@ export default {
   methods: {
     async onClickCreate() {
       try {
-        const response = await this.$axios.post("/posts", this.post);
+        const response = await this.$axios.post("/posts", { post: this.post });
         console.log(response);
         this.$router.push("/");
       } catch (error) {
