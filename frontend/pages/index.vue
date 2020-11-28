@@ -18,11 +18,11 @@
 export default {
   async asyncData(ctx) {
     try {
-      const response = await ctx.$axios.get('/posts')
-      console.log(response)
+      const response = await ctx.$axios.get('/posts');
+      console.log("aaaa");
       return {
         posts: response.data,
-      }
+      };
     } catch (error) {
       console.error(error)
     }

@@ -16,27 +16,27 @@
 export default {
   async asyncData(ctx) {
     try {
-      const response = await ctx.$axios.get(`/posts/${ctx.route.params.id}`);
-      console.log(response);
+      const response = await ctx.$axios.get(`/posts/${ctx.route.params.id}`)
+      console.log(response)
       return {
-        post: response.data
-      };
+        post: response.data,
+      }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   },
   methods: {
     onClickEdit() {
-      this.$router.push(`/posts/${this.post.id}/edit`);
+      this.$router.push(`/posts/${this.post.id}/edit`)
     },
-    async onClickDestroy(){
+    async onClickDestroy() {
       try {
         const response = await this.$axios.delete(`/posts/${this.post.id}`)
-        this.$router.push(`/`);
+        this.$router.push(`/`)
       } catch (error) {
-        console.error(error.response);
+        console.error(error.response)
       }
-    }
+    },
   },
-};
+}
 </script>

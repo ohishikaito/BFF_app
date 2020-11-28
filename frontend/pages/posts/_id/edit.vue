@@ -12,23 +12,25 @@
 export default {
   async asyncData(ctx) {
     try {
-      const response = await ctx.$axios.get(`/posts/${ctx.route.params.id}`);
+      const response = await ctx.$axios.get(`/posts/${ctx.route.params.id}`)
       return {
-        post: response.data
-      };
+        post: response.data,
+      }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   },
   methods: {
     async onClickUpdate() {
       try {
-        const response = await this.$axios.put(`/posts/${this.post.id}`, { post: this.post });
-        this.$router.push(`/posts/${this.post.id}`);
+        const response = await this.$axios.put(`/posts/${this.post.id}`, {
+          post: this.post,
+        })
+        this.$router.push(`/posts/${this.post.id}`)
       } catch (error) {
-        console.error(error.response, 4);
+        console.error(error.response, 4)
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
