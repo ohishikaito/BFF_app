@@ -9,7 +9,9 @@
       </div>
     </ul>
     <div>
-      <button @click="onClickNew">投稿ページへ</button>
+      <button @click="onClickNewPost">投稿ページへ</button>
+      <button @click="onClickUsers">ユーザー一覧</button>
+      <button @click="onClickNewUesr">ユーザー登録ページへ</button>
     </div>
   </div>
 </template>
@@ -18,21 +20,26 @@
 export default {
   async asyncData(ctx) {
     try {
-      const response = await ctx.$axios.get('/posts');
-      console.log("aaaa");
+      const response = await ctx.$axios.get('/posts')
       return {
         posts: response.data,
-      };
+      }
     } catch (error) {
       console.error(error)
     }
   },
   methods: {
-    onClickNew() {
+    onClickNewPost() {
       this.$router.push('/posts/new')
     },
     onClickShow(postId) {
       this.$router.push(`/posts/${postId}`)
+    },
+    onClickNewUesr() {
+      this.$router.push('/users/new')
+    },
+    onClickUsers() {
+      this.$router.push('/users')
     },
   },
 }
