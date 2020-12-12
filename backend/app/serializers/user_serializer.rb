@@ -1,18 +1,14 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: users
 #
 #  id         :bigint           not null, primary key
-#  deleted_at :datetime
+#  email      :string(255)
+#  login      :string(255)
 #  name       :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  user_id    :bigint
 #
-# Indexes
-#
-#  index_posts_on_user_id  (user_id)
-#
-class PostSerializer < ActiveModel::Serializer
-  attributes :id, :name
+class UserSerializer < ActiveModel::Serializer
+  attributes :id, :name, :email, :login
 end
