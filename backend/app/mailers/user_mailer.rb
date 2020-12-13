@@ -8,10 +8,9 @@ class UserMailer < ApplicationMailer
   end
   
   def send_mail(user)
-    # p user
     @user = user
     mail(
-      from: 'zipmoko2@gmail.com',
+      from: Rails.application.credentials[:gmail][:address],
       to: @user.email,
       subject: 'お問い合わせ通知'
     )
