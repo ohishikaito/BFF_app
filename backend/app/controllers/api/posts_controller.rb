@@ -38,7 +38,8 @@ class Api::PostsController < ApplicationController
     def post_params
       # params.require(:post).permit(:name)
       # params.permit(:name, :id)
-      params.require(:post).permit(:name, :id)
+      # params.require(:post).permit(:name, :id)
+      params.permit(:name, :id, :video)
     end
 
 end

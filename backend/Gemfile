@@ -55,3 +55,7 @@ gem 'paranoia'
 
 # モデルにカラムを表示
 gem 'annotate'
+
+# 画像投稿
+gem 'carrierwave'
+gem 'mini_magick'
