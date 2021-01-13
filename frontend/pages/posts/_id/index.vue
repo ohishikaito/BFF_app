@@ -5,6 +5,21 @@
       <li>
         <div>id: {{ post.id }}</div>
         <div>name: {{ post.name }}</div>
+        <div>
+          video-source:
+          <video controls>
+            <source type="video/mp4" :src="post.video.url" />
+            <!-- <source type="video/mp4" src="../../../assets/test.mp4" /> -->
+          </video>
+          video:
+          <video
+            type="video/mp4"
+            height="100"
+            width="100"
+            src="../../../assets/test.mp4"
+          ></video>
+          :src="post.video.url"
+        </div>
       </li>
     </ul>
     <button @click="onClickEdit">編集する</button>
@@ -17,7 +32,7 @@ export default {
   async asyncData(ctx) {
     try {
       const response = await ctx.$axios.get(`/posts/${ctx.route.params.id}`)
-      console.log(response)
+      console.log(response.data)
       return {
         post: response.data,
       }
