@@ -1,14 +1,15 @@
-export default ({ $axios }) => {
+export default (ctx) => {
   // リクエストログ
-  $axios.onRequest((config) => {
+  ctx.$axios.onRequest((config) => {
+    config.headers = ctx.store.getters['getAuth']
     // console.log(config)
   })
   // レスポンスログ
-  $axios.onResponse((config) => {
+  ctx.$axios.onResponse((config) => {
     // console.log(config)
   })
   // エラーログ
-  $axios.onError((e) => {
+  ctx.$axios.onError((e) => {
     // console.log(e.response)
   })
 }
