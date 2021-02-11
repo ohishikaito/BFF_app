@@ -19,23 +19,23 @@
 </template>
 
 <script>
-import posts from '~/apollo/gqls/queries/posts'
+// import posts from '~/apollo/gqls/queries/posts'
 export default {
-  apollo: {
-    posts: {
-      query: posts,
-    },
-  },
-  // async asyncData(ctx) {
-  //   try {
-  //     const response = await ctx.$axios.get('/posts')
-  //     return {
-  //       posts: response.data,
-  //     }
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
+  // apollo: {
+  //   posts: {
+  //     query: posts,
+  //   },
   // },
+  async asyncData(ctx) {
+    try {
+      const response = await ctx.$axios.get('/posts')
+      return {
+        posts: response.data,
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  },
   methods: {
     onClickNewPost() {
       this.$router.push('/posts/new')

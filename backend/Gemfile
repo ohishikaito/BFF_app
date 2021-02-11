@@ -60,4 +60,6 @@ gem 'annotate'
 gem 'carrierwave'
 gem 'mini_magick'
 
-# db
+# ログイン周りと認証
+gem 'devise'
+gem 'devise_token_auth'
