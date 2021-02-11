@@ -6,8 +6,6 @@
       <input type="text" v-model="user.name" />
       email
       <input type="text" v-model="user.email" />
-      login
-      <input type="text" v-model="user.login" />
     </div>
     <button @click="onClickCreate">登録する</button>
   </div>
@@ -20,7 +18,6 @@ export default {
       user: {
         name: '',
         email: '',
-        login: '',
       },
     }
   },
