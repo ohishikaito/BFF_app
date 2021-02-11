@@ -28,5 +28,11 @@
 #  updated_at             :datetime         not null
 #
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email
+  attributes %i[
+    id
+    name
+    email
+  ]
+
+  has_many :posts
 end

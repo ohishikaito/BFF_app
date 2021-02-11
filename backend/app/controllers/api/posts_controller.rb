@@ -1,5 +1,5 @@
 class Api::PostsController < ApplicationController
-  before_action :authenticate_api_user!, only: %i[show]
+  # before_action :authenticate_api_user!, only: %i[show]
 
   def index
     posts = Post.all

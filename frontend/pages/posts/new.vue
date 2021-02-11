@@ -30,9 +30,9 @@ export default {
   },
   methods: {
     toBlob(base64) {
-      console.log(base64, 'base64')
+      // console.log(base64, 'base64')
       var bin = atob(base64.replace(/^.*,/, ''))
-      console.log(bin, 'bin')
+      // console.log(bin, 'bin')
       var buffer = new Uint8Array(bin.length)
       for (var i = 0; i < bin.length; i++) {
         buffer[i] = bin.charCodeAt(i)
@@ -67,7 +67,7 @@ export default {
       }
       const file = e.target.files[0]
       this.$refs.image0VideoUploader.src = file
-      console.log(file, 'file')
+      // console.log(file, 'file')
       this.post.image0 = file
       reader.readAsDataURL(file)
       // this.post.image0 = new File([this.imgSrc], 'image0.mp4', {type: 'video/mp4'})
@@ -78,15 +78,15 @@ export default {
       const req = new FormData()
       req.append('name', this.post.name)
       req.append('video', this.post.image0)
-      console.log(this.post.image0)
-      console.log(req)
+      // console.log(this.post.image0)
+      // console.log(req)
       try {
         const response = await this.$axios.post('/posts', req, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         })
-        console.log(response)
+        // console.log(response)
         this.$router.push('/')
       } catch (error) {
         console.error(error.response)

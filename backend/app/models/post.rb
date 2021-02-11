@@ -16,6 +16,10 @@
 #
 class Post < ApplicationRecord
   acts_as_paranoid
+
   validates :name, presence: :true
+
   mount_uploader :video, VideoUploader
+
+  belongs_to :user
 end

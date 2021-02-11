@@ -2,12 +2,12 @@
   <div>
     <h1>投稿ページ</h1>
     <div>
-      name
-      <input type="text" v-model="user.name" />
       email
       <input type="text" v-model="user.email" />
+      password
+      <input type="text" v-model="user.password" />
     </div>
-    <button @click="onClickCreate">登録する</button>
+    <button @click="onClickSignIn">sign in</button>
   </div>
 </template>
 
@@ -16,15 +16,15 @@ export default {
   data() {
     return {
       user: {
-        name: '',
-        email: '',
+        email: 'test3@example.com',
+        password: 'password2',
       },
     }
   },
   methods: {
-    async onClickCreate() {
+    async onClickSignIn() {
       try {
-        const response = await this.$axios.post('/users', { user: this.user })
+        const response = await this.$axios.post('/auth/sign_in', this.user)
         console.log(response)
         this.$router.push('/')
       } catch (error) {

@@ -2,7 +2,8 @@
   "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
   "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
   "eslint.enable": true,
-  "editor.formatOnSave": false,
+  // "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "eslint.autoFixOnSave": true,
   "eslint.validate": [
     "javascript",

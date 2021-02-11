@@ -7,13 +7,15 @@
           {{ post.id }}
         </div>
         <div>{{ post.name }}</div>
-        <button @click="onClickShow(post.id)">詳細へ</button>
+        <nuxt-link :to="`/posts/${post.id}`">詳細</nuxt-link>
       </div>
     </ul>
     <div>
-      <button @click="onClickNewPost">投稿ページへ</button>
-      <button @click="onClickUsers">ユーザー一覧</button>
-      <button @click="onClickNewUesr">ユーザー登録ページへ</button>
+      <nuxt-link :to="`/posts/new`">投稿</nuxt-link>
+      <nuxt-link :to="`/users`">ユーザー一覧</nuxt-link>
+      <nuxt-link :to="`/auth/sign-in`">ログイン</nuxt-link>
+      <button @click="onClickSignOut">ログアウト</button>
+      <nuxt-link :to="`/auth/sign-up`">会員登録</nuxt-link>
     </div>
   </div>
 </template>
@@ -27,7 +29,7 @@ export default {
   //   },
   // },
   async asyncData(ctx) {
-    try {
+      try {
       const response = await ctx.$axios.get('/posts')
       return {
         posts: response.data,
@@ -37,18 +39,9 @@ export default {
     }
   },
   methods: {
-    onClickNewPost() {
-      this.$router.push('/posts/new')
-    },
-    onClickShow(postId) {
-      this.$router.push(`/posts/${postId}`)
-    },
-    onClickNewUesr() {
-      this.$router.push('/users/new')
-    },
-    onClickUsers() {
-      this.$router.push('/users')
-    },
+    onClickSignOut() {
+      // ログアウトする処理
+    }
   },
 }
 </script>

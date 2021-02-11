@@ -15,5 +15,11 @@
 #  index_posts_on_user_id  (user_id)
 #
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :name, :video
+  attributes %i[
+    id
+    name
+    video
+  ]
+
+  belongs_to :user
 end

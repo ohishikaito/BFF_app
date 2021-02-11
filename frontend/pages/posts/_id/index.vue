@@ -32,7 +32,7 @@ export default {
   async asyncData(ctx) {
     try {
       const response = await ctx.$axios.get(`/posts/${ctx.route.params.id}`)
-      console.log(response.data)
+      // console.log(response.data)
       return {
         post: response.data,
       }

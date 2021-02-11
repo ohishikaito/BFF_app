@@ -6,12 +6,11 @@
         <div>id: {{ user.id }}</div>
         <div>name:{{ user.name }}</div>
         <div>email: {{ user.email }}</div>
-        <div>login: {{ user.login }}</div>
-        <button @click="onClickShow(user.id)">詳細へ</button>
+        <nuxt-link :to="`/users/${user.id}`">詳細へ</nuxt-link>
       </div>
     </ul>
     <div>
-      <button @click="onClickNewuser">トップページへ戻る</button>
+      <nuxt-link :to="`/`">トップページへ戻る</nuxt-link>
     </div>
   </div>
 </template>
@@ -29,15 +28,6 @@ export default {
     }
   },
   methods: {
-    onClickNewuser() {
-      this.$router.push('/users/new')
-    },
-    onClickShow(userId) {
-      this.$router.push(`/users/${userId}`)
-    },
-    onClickNewUesr() {
-      this.$router.push('/users/new')
-    },
   },
 }
 </script>
