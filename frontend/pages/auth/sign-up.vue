@@ -2,6 +2,8 @@
   <div>
     <h1>投稿ページ</h1>
     <div>
+      name
+      <input type="text" v-model="user.name" />
       email
       <input type="text" v-model="user.email" />
       password
@@ -16,6 +18,7 @@ export default {
   data() {
     return {
       user: {
+        name: 'name',
         email: 'test@example.com',
         password: 'password2',
       },
@@ -25,9 +28,9 @@ export default {
     async onClickSignIn() {
       try {
         const response = await this.$axios.post('/auth', this.user)
-        console.log(this)
-        // this.$cookie.set('user', response)
-        console.log(response)
+        const user = response.data.data
+        this.$store.dispatch('setUser', user)
+        this.$store.dispatch('signIn', response.headers)
         this.$router.push('/')
       } catch (error) {
         console.error(error.response)

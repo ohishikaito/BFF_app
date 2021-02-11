@@ -37,10 +37,7 @@ class Api::PostsController < ApplicationController
 
   private
     def post_params
-      # params.require(:post).permit(:name)
-      # params.permit(:name, :id)
-      # params.require(:post).permit(:name, :id)
-      params.permit(:name, :id, :video)
+      params.permit(:name, :id, :video).merge(user_id: current_api_user.id)
     end
 
 end

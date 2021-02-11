@@ -23,12 +23,10 @@ export default {
   methods: {
     async onClickUpdate() {
       try {
-        const response = await this.$axios.put(`/posts/${this.post.id}`, {
-          post: this.post,
-        })
+        const response = await this.$axios.put(`/posts/${this.post.id}`, this.post)
         this.$router.push(`/posts/${this.post.id}`)
       } catch (error) {
-        console.error(error.response, 4)
+        console.error(error.response)
       }
     },
   },

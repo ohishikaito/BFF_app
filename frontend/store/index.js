@@ -7,10 +7,14 @@ export const state = () => ({
 export const getters = {
   getUser: (state) => state.user,
   getAuth: (state) => state.auth,
-  getAuthenticated: (state) => state.authenticated,
+  authenticated: (state) => state.authenticated,
 }
 
 export const mutations = {
+  setUser(state, user) {
+    this.$cookies.set('user', user)
+    state.user = user
+  },
   setAuth(state, headers) {
     const auth = {
       'access-token': headers['access-token'],
@@ -24,18 +28,49 @@ export const mutations = {
     this.$cookies.set('authenticated', true)
     state.authenticated = true
   },
-  setUser(state, user) {
-    this.$cookies.set('user', user)
-    state.user = user
+  removeUser(state) {
+    this.$cookies.remove('user')
+    state.user = null
+  },
+  removeAuth(state) {
+    this.$cookies.remove('auth')
+    state.auth = null
+  },
+  disableAuthenticated(state) {
+    this.$cookies.remove('authenticated')
+    state.authenticated = false
   },
 }
 
 export const actions = {
+  async nuxtClientInit({ commit }) {
+    const user = this.$cookies.get('user')
+    const auth = this.$cookies.get('auth')
+    const authenticated = this.$cookies.get('authenticated')
+    if (user) {
+      commit('setUser', user)
+    }
+    if (auth) {
+      commit('setAuth', auth)
+    }
+    if (authenticated) {
+      commit('enableAuthenticated')
+    }
+  },
+  setUser({ commit }, payload) {
+    commit('setUser', payload)
+  },
   signIn({ commit }, payload) {
     commit('setAuth', payload)
     commit('enableAuthenticated')
   },
-  setUser({ commit }, payload) {
-    commit('setUser', payload)
+  signOut({ commit }) {
+    commit('removeUser')
+    commit('removeAuth')
+    commit('disableAuthenticated')
+  },
+  unAuthorized({ commit }) {
+    commit('removeUser')
+    commit('disableAuthenticated')
   },
 }

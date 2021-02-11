@@ -17,9 +17,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [
-    'plugins/axios', // 追加
-  ],
+  plugins: ['plugins/axios', 'plugins/nuxt-client-init'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
