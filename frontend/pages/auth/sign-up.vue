@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       user: {
-        email: 'test3@example.com',
+        email: 'test@example.com',
         password: 'password2',
       },
     }
@@ -24,12 +24,10 @@ export default {
   methods: {
     async onClickSignIn() {
       try {
-        const response = await this.$axios.post('/auth/sign_in', this.user)
-        const user = response.data.data
+        const response = await this.$axios.post('/auth', this.user)
         console.log(this)
+        // this.$cookie.set('user', response)
         console.log(response)
-        this.$cookies.set('user', user)
-        this.$cookies.set('authenticated', true)
         this.$router.push('/')
       } catch (error) {
         console.error(error.response)

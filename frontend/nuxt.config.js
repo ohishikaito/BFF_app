@@ -33,7 +33,7 @@ export default {
     port: 3003, // デフォルト: 3000
     host: '0.0.0.0', // デフォルト: localhost
   },
-  modules: ['@nuxtjs/axios', '@nuxtjs/apollo'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/apollo', 'cookie-universal-nuxt'],
   axios: {
     baseURL: 'http://localhost:3004/api',
   },

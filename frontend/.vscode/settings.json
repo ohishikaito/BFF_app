@@ -10,10 +10,14 @@
     "javascriptreact",
     {
       "language": "vue",
+      "editor.formatOnSave": true,
+      "eslint.autoFixOnSave": true,
       "autoFix": true
     },
     {
       "language": "vue-html",
+      "editor.formatOnSave": true,
+      "eslint.autoFixOnSave": true,
       "autoFix": true
     }
   ],
