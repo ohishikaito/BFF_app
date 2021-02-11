@@ -13,9 +13,6 @@
     <div>
       <nuxt-link :to="`/posts/new`">投稿</nuxt-link>
       <nuxt-link :to="`/users`">ユーザー一覧</nuxt-link>
-      <nuxt-link :to="`/auth/sign-in`">ログイン</nuxt-link>
-      <button @click="onClickSignOut">ログアウト</button>
-      <nuxt-link :to="`/auth/sign-up`">会員登録</nuxt-link>
     </div>
   </div>
 </template>
@@ -36,11 +33,6 @@ export default {
       }
     } catch (error) {
       console.error(error)
-    }
-  },
-  methods: {
-    onClickSignOut() {
-      // ログアウトする処理
     }
   },
 }
