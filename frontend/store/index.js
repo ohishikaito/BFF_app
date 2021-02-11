@@ -20,6 +20,7 @@ export const mutations = {
       'access-token': headers['access-token'],
       client: headers['client'],
       uid: headers['uid'],
+      expiry: headers['expiry'],
     }
     this.$cookies.set('auth', auth)
     state.auth = auth
