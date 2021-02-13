@@ -18,9 +18,9 @@ export default {
   data() {
     return {
       user: {
-        name: 'name',
-        email: 'test@example.com',
-        password: 'password2',
+        name: '大石海渡',
+        email: 'ohishikaito@gmail.com',
+        password: 'adaadaada',
         confirm_success_url: 'http://localhost:3003/'
       },
     }
@@ -29,10 +29,10 @@ export default {
     async onClickSignIn() {
       try {
         const response = await this.$axios.post('/auth', this.user)
-        const user = response.data.data
-        this.$store.dispatch('setUser', user)
-        this.$store.dispatch('signIn', response.headers)
-        this.$router.push('/')
+        // const user = response.data.data
+        // this.$store.dispatch('setUser', user)
+        // this.$store.dispatch('signIn', response.headers)
+        // this.$router.push('/')
       } catch (error) {
         console.error(error.response)
       }
