@@ -50,6 +50,8 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # ---------------------------------------------------------------------
+  # ↓はgmailを使ったメール認証
   config.action_mailer.default_options = { from: ENV['EMAIL_ADDRESS'] }
   config.action_mailer.default_url_options = { host: 'localhost:3004' }
   config.action_mailer.delivery_method = :smtp
@@ -62,4 +64,5 @@ Rails.application.configure do
     authentication:       'plain',
     enable_starttls_auto:  true
   }
+  # --------------------------------------------------------------------
 end
