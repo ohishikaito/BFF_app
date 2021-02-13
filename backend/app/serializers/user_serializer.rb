@@ -32,6 +32,7 @@ class UserSerializer < ActiveModel::Serializer
     id
     name
     email
+    created_at
   ]
 
   has_many :posts

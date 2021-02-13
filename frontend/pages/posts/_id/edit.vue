@@ -3,6 +3,7 @@
     <h1>編集ページ</h1>
     <div>
       <input type="text" v-model="post.name" />
+      <input type="text" v-model="post.subName" />
     </div>
     <button @click="onClickUpdate">更新する</button>
   </div>
@@ -13,8 +14,9 @@ export default {
   async asyncData(ctx) {
     try {
       const response = await ctx.$axios.get(`/posts/${ctx.route.params.id}`)
+      const post = response.data
       return {
-        post: response.data,
+        post,
       }
     } catch (error) {
       console.error(error)
@@ -22,8 +24,16 @@ export default {
   },
   methods: {
     async onClickUpdate() {
+      const req = new FormData()
+      req.append('name', this.post.name)
+      req.append('sub_name', this.post.subName)
+      req.append('video', this.post.image0)
       try {
-        const response = await this.$axios.put(`/posts/${this.post.id}`, this.post)
+        const response = await this.$axios.put(`/posts/${this.post.id}`, req, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
         this.$router.push(`/posts/${this.post.id}`)
       } catch (error) {
         console.error(error.response)

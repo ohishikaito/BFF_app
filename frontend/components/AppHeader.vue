@@ -2,7 +2,7 @@
   <div>
     <nuxt-link to="/">ホームへ</nuxt-link>
     <template v-if="authenticated">
-      <p>{{ currentUserName }}</p>
+      <nuxt-link :to="`/auth/edit`">アカウント情報編集</nuxt-link>
       <button @click="onClickSignOut">ログアウト</button>
     </template>
     <template v-else-if="!authenticated">
@@ -14,14 +14,15 @@
 
 <script>
 export default {
+  data() {
+    return {
+      user: this.$store.getters['getUser']
+    }
+  },
   computed: {
     authenticated() {
       return this.$store.getters['authenticated']
     },
-    currentUserName() {
-      const user = this.$store.getters['getUser']
-      return user.name
-    }
   },
   methods: {
     onClickSignOut() {

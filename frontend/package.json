@@ -14,13 +14,14 @@
     "@nuxtjs/axios": "^5.12.2",
     "apollo-link-http": "^1.5.17",
     "appolo": "^7.0.5",
+    "camelcase-keys": "^6.2.2",
     "cookie-universal-nuxt": "^2.1.4",
     "core-js": "^3.6.5",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
     "nuxt": "^2.14.6",
-    "snakecase-keys": "^3.2.0"
+    "snakecase-keys": "^3.2.1"
   },
   "devDependencies": {
     "prettier": "^2.2.1"
