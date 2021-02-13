@@ -8,7 +8,10 @@ export default (ctx) => {
     // NOTE: FormDataだったらすでにsnakeCaseになっているのでreturnする。何も処理しない
     if (config.data instanceof FormData) {
       return config
-    } else if (config.method === ('post' || 'put')) {
+      // FIX: method === 'put' のとき、 'post' || 'put' で書いたらなぜかfalseになるので分けた。修正したい。
+    } else if (config.method === 'post') {
+      config.data = snakeCaseKeys(config.data, { deep: true })
+    } else if (config.method === 'put') {
       config.data = snakeCaseKeys(config.data, { deep: true })
     }
     return config
