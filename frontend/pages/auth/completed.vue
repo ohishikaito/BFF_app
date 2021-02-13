@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>メール認証が完了しました</h1>
+    <h1>{{ user.name }}さん、ようこそ！</h1>
+    <h2>メール認証が完了しました</h2>
     <nuxt-link :to="`/`">トップページへ戻る</nuxt-link>
   </div>
 </template>
@@ -8,13 +9,14 @@
 <script>
 export default {
   async asyncData(ctx) {
-    // const user = ctx.store.getters['getUser']
-    //     this.$store.dispatch('setUser', user)
-    //     this.$store.dispatch('signIn', response.headers)
+    const headers = ctx.route.query
+    ctx.store.dispatch('signIn', headers)
     try {
-
+      const response = await ctx.$axios.get('/auth/validate_token')
+      const user = response.data.data
+      ctx.store.dispatch('setUser', user)
       return {
-        // user,
+        user,
       }
     } catch(error) {
       console.error(error)
@@ -22,7 +24,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
