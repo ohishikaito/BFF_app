@@ -5,6 +5,7 @@
 #  id         :bigint           not null, primary key
 #  deleted_at :datetime
 #  name       :string(255)
+#  sub_name   :string(255)
 #  video      :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

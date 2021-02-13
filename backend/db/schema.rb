@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_11_021839) do
+ActiveRecord::Schema.define(version: 2021_02_13_012041) do
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_021839) do
     t.bigint "user_id"
     t.datetime "deleted_at"
     t.string "video"
+    t.string "sub_name"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

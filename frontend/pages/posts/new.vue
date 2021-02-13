@@ -2,6 +2,7 @@
   <div>
     <h1>投稿ページ</h1>
     <div>name: <input type="text" v-model="post.name" /></div>
+    <div>subName: <input type="text" v-model="post.subName" /></div>
     <div>
       video:
       <input
@@ -25,6 +26,7 @@ export default {
       imgSrc: '',
       post: {
         name: '',
+        subName: '',
         image0: '',
       },
     }
@@ -78,17 +80,15 @@ export default {
     async onClickCreate() {
       const req = new FormData()
       req.append('name', this.post.name)
+      req.append('sub_name', this.post.subName)
       req.append('video', this.post.image0)
-      // console.log(this.post.image0)
-      // console.log(req)
       try {
         const response = await this.$axios.post('/posts', req, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         })
-        // console.log(response)
-        this.$router.push('/')
+        this.$router.push(`/posts/${this.post.id}`)
       } catch (error) {
         console.error(error.response)
       }

@@ -1,5 +1,5 @@
 class Api::PostsController < ApplicationController
-  before_action :authenticate_api_user!, only: %i[show]
+  before_action :authenticate_api_user!, only: %i[create show update]
 
   def index
     posts = Post.all
@@ -16,7 +16,6 @@ class Api::PostsController < ApplicationController
   end
 
   def show
-    # binding.pry
     post = Post.find(params[:id])
     render json: post, status: :ok
   end
@@ -37,7 +36,12 @@ class Api::PostsController < ApplicationController
 
   private
     def post_params
-      params.permit(:name, :id, :video).merge(user_id: current_api_user.id)
+      params.permit(
+        :id,
+        :name,
+        :sub_name,
+        :video,
+      ).merge(user_id: current_api_user.id)
     end
 
 end
