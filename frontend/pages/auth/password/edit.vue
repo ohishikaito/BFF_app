@@ -16,10 +16,6 @@
 export default {
   async asyncData(ctx) {
     try {
-      // const response = await ctx.$axios.get(`/auth/password/edit?email=${ctx.route.query.email}&reset_password_token=${ctx.route.query.reset_password_token}`)
-      // const response = await ctx.$axios.get(`/auth/password/edit?reset_password_token=${ctx.route.query.reset_password_token}`)
-      // const user = response.data.data
-      // console.log(ctx.route.query)
       const user = {}
       user.password = ''
       user.passwordConfirmation = ''
@@ -32,6 +28,7 @@ export default {
   },
   methods: {
     async onClickUpdatePassword() {
+      // NOTE: passwordを変更する時にheadersのaccess-tokenなどが必要なので、一旦signInする。その後すぐsignOutさせる
       const headers = this.$route.query
       this.$store.dispatch('signIn', headers)
       try {
