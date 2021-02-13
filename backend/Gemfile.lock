@@ -89,6 +89,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.9.2)
+      devise (>= 4.7.1)
+    devise-i18n-views (0.3.7)
     devise_token_auth (1.1.5)
       bcrypt (~> 3.0)
       devise (> 3.5.2, < 5)
@@ -215,6 +218,8 @@ DEPENDENCIES
   byebug
   carrierwave
   devise
+  devise-i18n
+  devise-i18n-views
   devise_token_auth
   dotenv-rails
   graphiql-rails

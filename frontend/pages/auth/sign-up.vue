@@ -9,7 +9,7 @@
       password
       <input type="text" v-model="user.password" />
     </div>
-    <button @click="onClickSignIn">sign in</button>
+    <button @click="onClickSignIn">sign up</button>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
         name: '大石海渡',
         email: 'ohishikaito@gmail.com',
         password: 'adaadaada',
-        confirm_success_url: 'http://localhost:3003/'
+        confirm_success_url: 'http://localhost:3003/auth/completed'
       },
     }
   },
