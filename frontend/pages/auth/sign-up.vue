@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>投稿ページ</h1>
+    <h1>会員登録</h1>
     <div>
       name
       <input type="text" v-model="user.name" />
@@ -21,6 +21,7 @@ export default {
         name: 'name',
         email: 'test@example.com',
         password: 'password2',
+        confirm_success_url: 'http://localhost:3003/'
       },
     }
   },

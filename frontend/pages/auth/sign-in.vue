@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>投稿ページ</h1>
+    <h1>ログイン</h1>
     <div>
       email
       <input type="text" v-model="user.email" />
