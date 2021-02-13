@@ -8,6 +8,7 @@
       <input type="text" v-model="user.password" />
     </div>
     <button @click="onClickSignIn">sign in</button>
+    <nuxt-link :to="`/auth/password`">パスワード再設定</nuxt-link>
   </div>
 </template>
 

@@ -1,8 +1,9 @@
 <template>
   <div>
     <h1>アカウント情報変更ページ</h1>
-    <p>email: {{ user.email }}</p>
     <div>
+      email
+      <input type="email" v-model="user.email" />
       name
       <input type="text" v-model="user.name" />
       password
