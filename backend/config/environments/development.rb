@@ -50,19 +50,32 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # ---------------------------------------------------------------------
-  # ↓はgmailを使ったメール認証
+  # メールの設定
   config.action_mailer.default_options = { from: ENV['EMAIL_ADDRESS'] }
-  config.action_mailer.default_url_options = { host: 'localhost:3004' }
+  config.action_mailer.default_url_options = { host: ENV['FRONTEND_HOST'] }
   config.action_mailer.delivery_method = :smtp
+  # ---------------------------------------------------------------------
+  # gmail
+  # config.action_mailer.smtp_settings = {
+  #   address:              'smtp.gmail.com',
+  #   port:                  587,
+  #   domain:               'gmail.com',
+  #   user_name:             ENV['EMAIL_ADDRESS'],
+  #   password:              ENV['EMAIL_PASSWORD'],
+  #   authentication:       'plain',
+  #   enable_starttls_auto:  true
+  # }
+  # --------------------------------------------------------------------
+
+  # ---------------------------------------------------------------------
+  # mailtrap
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                  587,
-    domain:               'gmail.com',
-    user_name:             ENV['EMAIL_ADDRESS'],
-    password:              ENV['EMAIL_PASSWORD'],
-    authentication:       'plain',
-    enable_starttls_auto:  true
+    :user_name => ENV['MAILTRAP_USER_NAME'],
+    :password => ENV['MAILTRAP_PASSWORD'],
+    :address => 'smtp.mailtrap.io',
+    :domain => 'smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
   }
   # --------------------------------------------------------------------
 end
