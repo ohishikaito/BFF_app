@@ -2,7 +2,7 @@ class Api::PostsController < ApplicationController
   before_action :authenticate_api_user!, only: %i[create show update]
 
   def index
-    posts = Post.all
+    posts = Post.includes(:user)
     render json: posts, status: :ok
   end
 
