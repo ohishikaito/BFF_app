@@ -3,7 +3,7 @@ class Api::PostsController < ApplicationController
 
   def index
     # posts = Post.includes(:user)
-    posts = cache_posts
+    posts = cache("posts#index")
     # p posts.
     render json: posts, status: :ok
   end
@@ -24,7 +24,6 @@ class Api::PostsController < ApplicationController
 
   def update
     post = Post.find(params[:id])
-    # binding.pry
     post.update(post_params)
     render json: post, status: :ok
   end
@@ -37,9 +36,8 @@ class Api::PostsController < ApplicationController
 
 
   private
-    def cache_posts
-      # binding.pry
-      Rails.cache.fetch('cache_posts', expires_in: 60.minutes) do
+    def cache(path)
+      Rails.cache.fetch("#{path}", expires_in: 60.minutes) do
         Post.includes(:user).to_a
       end
     end

@@ -75,5 +75,4 @@ gem 'devise-i18n-views'
 gem 'rails-i18n'
 
 # redis関係 SQL結果をキャッシュするため
-gem 'redis'
 gem 'redis-rails'
