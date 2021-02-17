@@ -25,4 +25,13 @@ class Post < ApplicationRecord
   mount_uploader :video, VideoUploader
 
   belongs_to :user
+
+  scope :is_special, ->{ where(is_special: true) }
+  scope :not_is_special, ->{ where(is_special: false) }
+  counter_culture :user,
+                  column_name: proc {|model| model.is_special == true ? 'sp_post_count' : nil },
+                  column_names: {
+                      Post.is_special => :sp_post_count,
+                      Post.not_is_special => nil
+                  }
 end

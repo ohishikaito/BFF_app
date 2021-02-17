@@ -21,6 +21,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
 #  sign_in_count          :integer          default(0), not null
+#  sp_post_count          :integer          default(0), not null
 #  tokens                 :text(65535)
 #  uid                    :string(255)      default(""), not null
 #  unconfirmed_email      :string(255)

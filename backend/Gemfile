@@ -76,3 +76,6 @@ gem 'rails-i18n'
 
 # redis関係 SQL結果をキャッシュするため
 gem 'redis-rails'
+
+# is_specialカラムのカウント用
+gem 'counter_culture', '~> 2.0'
