@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  deleted_at :datetime
+#  is_special :boolean          default(FALSE)
 #  name       :string(255)
 #  sub_name   :string(255)
 #  video      :string(255)
@@ -20,6 +21,7 @@ class PostSerializer < ActiveModel::Serializer
     id
     name
     sub_name
+    is_special
     video
     created_at
   ]

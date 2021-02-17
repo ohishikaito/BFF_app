@@ -5,6 +5,7 @@
       <li>id: {{ post.id }}</li>
       <li>name: {{ post.name }}</li>
       <li>subName: {{ post.subName }}</li>
+      <li>is_special :{{ post.isSpecial }}</li>
       <li>
         video-source:
         <video controls>
@@ -19,6 +20,7 @@
           src="../../../assets/test.mp4"
         ></video>
         :src="post.video.url"
+        <img :src="post.video.url">
       </li>
     </ul>
     <button @click="onClickEdit">編集する</button>

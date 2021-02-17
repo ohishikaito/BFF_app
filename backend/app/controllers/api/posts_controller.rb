@@ -2,7 +2,6 @@ class Api::PostsController < ApplicationController
   before_action :authenticate_api_user!, only: %i[create show update]
 
   def index
-    # posts = Post.includes(:user) # NOTE: 直接SQLを発行
     posts = cache_posts_index # NOTE: redisのキャッシュ
     render json: posts, status: :ok
   end
@@ -36,8 +35,8 @@ class Api::PostsController < ApplicationController
 
   private
     def cache_posts_index
-      Rails.cache.fetch("posts#index", expires_in: 30.seconds) do
-        Post.includes(:user).to_a
+      Rails.cache.fetch("posts#index", expires_in: 30.minutes) do
+        Post.includes(:user).order(id: 'DESC').to_a
       end
     end
 
@@ -46,6 +45,7 @@ class Api::PostsController < ApplicationController
         :id,
         :name,
         :sub_name,
+        :is_special,
         :video,
       ).merge(user_id: current_api_user.id)
     end

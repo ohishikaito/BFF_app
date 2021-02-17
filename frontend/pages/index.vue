@@ -1,18 +1,19 @@
 <template>
   <div>
+    <div>
+      <nuxt-link :to="`/posts/new`">投稿</nuxt-link>
+      <nuxt-link :to="`/users`">ユーザー一覧</nuxt-link>
+    </div>
     <h1>投稿一覧</h1>
     <ul v-for="post in posts" :key="post.id">
       <div>
         <div>id :{{ post.id }}</div>
         <div>name :{{ post.name }}</div>
+        <div>is_special :{{ post.isSpecial }}</div>
         <div>createdAt :{{ post.createdAt }}</div>
         <nuxt-link :to="`/posts/${post.id}`">詳細</nuxt-link>
       </div>
     </ul>
-    <div>
-      <nuxt-link :to="`/posts/new`">投稿</nuxt-link>
-      <nuxt-link :to="`/users`">ユーザー一覧</nuxt-link>
-    </div>
   </div>
 </template>
 
