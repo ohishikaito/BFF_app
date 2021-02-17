@@ -2,7 +2,9 @@ class Api::PostsController < ApplicationController
   before_action :authenticate_api_user!, only: %i[create show update]
 
   def index
-    posts = Post.includes(:user)
+    # posts = Post.includes(:user)
+    posts = cache_posts
+    # p posts.
     render json: posts, status: :ok
   end
 
@@ -35,6 +37,13 @@ class Api::PostsController < ApplicationController
 
 
   private
+    def cache_posts
+      # binding.pry
+      Rails.cache.fetch('cache_posts', expires_in: 60.minutes) do
+        Post.includes(:user).to_a
+      end
+    end
+
     def post_params
       params.permit(
         :id,

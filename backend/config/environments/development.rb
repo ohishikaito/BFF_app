@@ -15,7 +15,13 @@ Rails.application.configure do
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
-    config.cache_store = :memory_store
+    # NOTE: cache_storeをredisに指定する
+    config.cache_store = :redis_cache_store, { url: "redis://localhost:6379" }
+    # NOTE: redis_cache_storeを使用するのでコメントアウト
+    # config.cache_store = :memory_store
+
+    # NOTE: ApplicationControllerのcache機能を使うかなので、redisを使う場合はfalseで問題なし
+    config.action_controller.perform_caching = false
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
