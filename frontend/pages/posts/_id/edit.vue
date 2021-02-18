@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>編集ページ</h1>
+    <p>id: {{ post.id }}</p>
     <div>
       <label for="">post.name</label>
       <input type="text" v-model="post.name" />
@@ -33,6 +34,7 @@ export default {
   methods: {
     async onClickUpdate() {
       const req = new FormData()
+      req.append('id', this.post.id)
       req.append('name', this.post.name)
       req.append('sub_name', this.post.subName)
       req.append('is_special', this.post.isSpecial)

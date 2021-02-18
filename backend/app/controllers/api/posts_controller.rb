@@ -1,43 +1,48 @@
 class Api::PostsController < ApplicationController
   before_action :authenticate_api_user!, only: %i[create show update]
+  before_action :set_post, only: %i[show update destroy]
 
   def index
-    posts = cache_posts_index # NOTE: redisのキャッシュ
-    render json: posts, status: :ok
+    @posts = cache_posts_index # NOTE: redisのキャッシュ。でも使うの微妙
+    render json: @posts, status: :ok
   end
 
   def create
-    post = Post.new(post_params)
-    if post.save
-      render json: post, status: :created
+    @post = Post.new(post_params)
+    if @post.save
+      render json: @post, status: :created
     else
-      render json: post.errors, status: :unprocessable_entity
+      render json: @post.errors, status: :unprocessable_entity
     end
   end
 
   def show
-    post = Post.find(params[:id])
-    render json: post, status: :ok
+    render json: @post, status: :ok
   end
 
   def update
-    post = Post.find(params[:id])
-    post.update(post_params)
-    render json: post, status: :ok
+    if @post.update(post_params)
+      render json: @post, status: :ok
+    else
+      render json: @post.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    post = Post.find(params[:id])
-    post.destroy
-    render json: post, status: :ok
+    @post.destroy
+    render json: @post, status: :ok
   end
 
-
   private
+    # NOTE: 30分以内はキャッシュで同じ一覧しか返さなくなるので、あまりredisを使わないほうが良いかも
     def cache_posts_index
       Rails.cache.fetch("posts#index", expires_in: 30.minutes) do
         Post.includes(:user).order(id: 'DESC').to_a
       end
+    end
+
+    def set_post
+      @post = Post.find(params[:id])
     end
 
     def post_params

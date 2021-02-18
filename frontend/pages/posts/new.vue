@@ -91,7 +91,7 @@ export default {
             'Content-Type': 'multipart/form-data',
           },
         })
-        this.$router.push(`/posts`)
+        this.$router.push(`/`)
       } catch (error) {
         console.error(error.response)
       }
