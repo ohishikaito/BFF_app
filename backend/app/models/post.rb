@@ -2,15 +2,16 @@
 #
 # Table name: posts
 #
-#  id         :bigint           not null, primary key
-#  deleted_at :datetime
-#  is_special :boolean          default(FALSE)
-#  name       :string(255)
-#  sub_name   :string(255)
-#  video      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint
+#  id          :bigint           not null, primary key
+#  deleted_at  :datetime
+#  is_special  :boolean          default(FALSE)
+#  likes_count :integer          default(0), not null
+#  name        :string(255)
+#  sub_name    :string(255)
+#  video       :string(255)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :bigint
 #
 # Indexes
 #
@@ -23,6 +24,8 @@ class Post < ApplicationRecord
   validates :is_special, inclusion: { in: [true, false] }
 
   mount_uploader :video, VideoUploader
+
+  has_many :likes
 
   belongs_to :user
 

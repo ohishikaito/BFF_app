@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_17_233849) do
+ActiveRecord::Schema.define(version: 2021_02_20_080326) do
+
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -21,6 +30,7 @@ ActiveRecord::Schema.define(version: 2021_02_17_233849) do
     t.string "video"
     t.string "sub_name"
     t.boolean "is_special", default: false
+    t.integer "likes_count", default: 0, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -51,4 +61,6 @@ ActiveRecord::Schema.define(version: 2021_02_17_233849) do
     t.integer "sp_post_count", default: 0, null: false
   end
 
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
 end
