@@ -24,6 +24,7 @@ class PostSerializer < ActiveModel::Serializer
     sub_name
     is_special
     video
+    likes_count
     created_at
   ]
 

@@ -11,7 +11,9 @@
         <div>name :{{ post.name }}</div>
         <div>is_special :{{ post.isSpecial }}</div>
         <div>createdAt :{{ post.createdAt }}</div>
+        <div>いいね数 :{{ post.likesCount }}</div>
         <nuxt-link :to="`/posts/${post.id}`">詳細</nuxt-link>
+        <button @click="onClickCreateLike(post.id)">いいね</button>
       </div>
     </ul>
   </div>
@@ -35,5 +37,17 @@ export default {
       console.error(error)
     }
   },
+  methods: {
+    async onClickCreateLike(postId) {
+      try {
+        const response = await this.$axios.post(`/posts/${postId}/likes/`, { postId })
+        const like = response.data
+        const post = this.posts.find(post => post.id === like.postId)
+        post.likesCount = like.post.likesCount
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
 }
 </script>

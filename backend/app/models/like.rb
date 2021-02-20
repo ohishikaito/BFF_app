@@ -22,5 +22,7 @@ class Like < ApplicationRecord
   belongs_to :post
   belongs_to :user
 
-  counter_culture :post,
+  # validates :user_id, uniqueness: { scope: :post_id }
+
+  counter_culture :post
 end

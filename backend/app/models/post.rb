@@ -26,6 +26,7 @@ class Post < ApplicationRecord
   mount_uploader :video, VideoUploader
 
   has_many :likes
+  has_many :liked_users, through: :likes, source: :user
 
   belongs_to :user
 
@@ -37,4 +38,8 @@ class Post < ApplicationRecord
                       Post.is_special => :sp_post_count,
                       Post.not_is_special => nil
                   }
+
+  # def currnet_user_liked?
+  #   liked_users.include?(user_id: current_api_user) if user_signed_in?
+  # end
 end

@@ -24,4 +24,6 @@ class LikeSerializer < ActiveModel::Serializer
     user_id
     post_id
   ]
+
+  belongs_to :post
 end

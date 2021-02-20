@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   end
   post "/graphql", to: "graphql#execute"
   namespace :api do
-    resources :posts
+    resources :posts do
+      resources :likes, only: %i[create destroy]
+    end
     resources :users
     mount_devise_token_auth_for 'User', at: 'auth', controllers: {
       registrations: 'api/auth/registrations',
