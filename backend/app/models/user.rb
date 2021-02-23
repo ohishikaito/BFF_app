@@ -13,10 +13,11 @@
 #  current_sign_in_ip     :string(255)
 #  email                  :string(255)
 #  encrypted_password     :string(255)      default(""), not null
+#  first_name             :string(255)      not null
 #  image                  :string(255)
+#  last_name              :string(255)      not null
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string(255)
-#  name                   :string(255)
 #  nickname               :string(255)
 #  provider               :string(255)      default("email"), not null
 #  remember_created_at    :datetime
@@ -38,4 +39,8 @@ class User < ActiveRecord::Base
 
   has_many :likes
   has_many :posts
+
+  def full_name
+    last_name + first_name
+  end
 end

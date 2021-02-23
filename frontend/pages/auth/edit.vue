@@ -2,10 +2,12 @@
   <div>
     <h1>アカウント情報変更ページ</h1>
     <div>
+      lastName
+      <input type="text" v-model="user.lastName" />
+      firstName
+      <input type="text" v-model="user.firstName" />
       email
       <input type="email" v-model="user.email" />
-      name
-      <input type="text" v-model="user.name" />
       password
       <input type="text" v-model="user.password" />
     </div>

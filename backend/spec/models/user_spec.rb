@@ -29,15 +29,8 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
-class UserSerializer < ActiveModel::Serializer
-  attributes %i[
-    id
-    first_name
-    last_name
-    full_name
-    email
-    created_at
-  ]
+require 'rails_helper'
 
-  has_many :posts
+RSpec.describe User, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

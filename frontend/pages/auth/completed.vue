@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ user.name }}さん、ようこそ！</h1>
+    <h1>{{ user.fullName }}さん、ようこそ！</h1>
     <h2>メール認証が完了しました</h2>
     <nuxt-link :to="`/`">トップページへ戻る</nuxt-link>
   </div>

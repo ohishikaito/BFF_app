@@ -2,8 +2,10 @@
   <div>
     <h1>会員登録</h1>
     <div>
-      name
-      <input type="text" v-model="user.name" />
+      lastName
+      <input type="text" v-model="user.lastName" />
+      firstName
+      <input type="text" v-model="user.firstName" />
       email
       <input type="text" v-model="user.email" />
       password
@@ -18,7 +20,8 @@ export default {
   data() {
     return {
       user: {
-        name: '大石海渡',
+        firstName: '海渡',
+        lastName: '大石',
         email: 'ohishikaito@gmail.com',
         password: 'adaadaada',
         confirm_success_url: 'http://localhost:3003/auth/completed'
