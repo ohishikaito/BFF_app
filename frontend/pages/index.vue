@@ -11,14 +11,14 @@
         <div>name :{{ post.name }}</div>
         <div>is_special :{{ post.isSpecial }}</div>
         <div>createdAt :{{ post.createdAt }}</div>
-        <div>いいね数 :{{ post.likesCount }}</div>
+        <div>いいね数 :{{ likesCount(post) }}</div>
         <nuxt-link :to="`/posts/${post.id}`">詳細</nuxt-link>
         <template v-if="authenticated">
           <template v-if="currentUserLiked(post, $store.getters['getUser'])">
             <button @click="onClickDeleteLike(post)">いいねを取り消す</button>
           </template>
           <template v-else>
-            <button @click="onClickCreateLike(post.id)">いいね</button>
+            <button @click="onClickCreateLike(post)">いいね</button>
           </template>
         </template>
       </div>
@@ -58,17 +58,18 @@ export default {
           return false
         }
       }
+    },
+    likesCount: () => {
+      return(post) => post.likes.length
     }
   },
   methods: {
-    async onClickCreateLike(postId) {
+    async onClickCreateLike(post) {
       try {
-        const response = await this.$axios.post(`/posts/${postId}/likes/`, { postId })
+        const response = await this.$axios.post(`/posts/${post.id}/likes/`, { postId: post.id })
         const like = response.data
-        const post = this.posts.find(post => post.id === like.postId)
+        post.likes.push(like)
         post.likesCount = like.post.likesCount
-        console.log(this.posts)
-        this.posts.splice()
       } catch (error) {
         console.error(error)
       }
@@ -76,13 +77,9 @@ export default {
     async onClickDeleteLike(post) {
       const user = this.$store.getters['getUser']
       const like = post.likes.find(like => like.userId === user.id)
-      console.log(post, like, user)
       try {
         const response = await this.$axios.delete(`/posts/${post.id}/likes/${like.id}`)
-        const response2 = await this.$axios.delete(`/posts/${post.id}`)
-        const post = response2.data
-        this.posts.find(it => it.id === post.id).likesCount = post.likesCount
-        // post.likesCount = like.post.likesCount
+        post.likes.splice(like, 1)
       } catch (error) {
         console.error(error)
       }

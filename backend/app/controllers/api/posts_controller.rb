@@ -6,7 +6,6 @@ class Api::PostsController < ApplicationController
     # @posts = cache_posts_index # NOTE: redisのキャッシュ。でも使うの微妙
     # posts = Post.includes(:user, likes: :user).order(id: 'DESC')
     posts = Post.includes(:user, :likes).order(id: 'DESC')
-    # 本当はliked_usersを参照せずに、current_userがいいねしてるかを探して、booleanを返すのが良い
     render json: posts, include: %i[user likes], status: :ok
   end
 
