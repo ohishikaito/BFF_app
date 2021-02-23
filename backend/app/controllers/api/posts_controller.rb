@@ -4,9 +4,10 @@ class Api::PostsController < ApplicationController
 
   def index
     # @posts = cache_posts_index # NOTE: redisのキャッシュ。でも使うの微妙
-    # posts = Post.includes(:user, likes: :user).order(id: 'DESC')
-    posts = Post.includes(:user, :likes).order(id: 'DESC')
-    render json: posts, include: %i[user likes], status: :ok
+    posts = Post.includes(likes: :user).order(id: 'DESC')
+    render json: posts, include: [likes: :user], status: :ok
+    # posts = Post.includes(user: :likes, likes: :user).order(id: 'DESC')
+    # render json: posts, include: [user: :likes, likes: :user], status: :ok
   end
 
   def create
