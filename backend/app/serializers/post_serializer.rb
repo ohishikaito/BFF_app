@@ -26,7 +26,9 @@ class PostSerializer < ActiveModel::Serializer
     video
     likes_count
     created_at
+    liked_users
   ]
 
   belongs_to :user
+  has_many :likes
 end

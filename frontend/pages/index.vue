@@ -13,7 +13,14 @@
         <div>createdAt :{{ post.createdAt }}</div>
         <div>いいね数 :{{ post.likesCount }}</div>
         <nuxt-link :to="`/posts/${post.id}`">詳細</nuxt-link>
-        <button @click="onClickCreateLike(post.id)">いいね</button>
+        <template v-if="authenticated">
+          <template v-if="currentUserLiked(post, $store.getters['getUser'])">
+            <button @click="onClickDeleteLike(post)">いいねを取り消す</button>
+          </template>
+          <template v-else>
+            <button @click="onClickCreateLike(post.id)">いいね</button>
+          </template>
+        </template>
       </div>
     </ul>
   </div>
@@ -30,11 +37,27 @@ export default {
   async asyncData(ctx) {
       try {
       const response = await ctx.$axios.get('/posts')
+      const posts = response.data
       return {
-        posts: response.data,
+        posts,
       }
     } catch (error) {
       console.error(error)
+    }
+  },
+  computed: {
+    authenticated() {
+      return this.$store.getters['authenticated']
+    },
+    currentUserLiked: () => {
+      return (post, user) => {
+        const like = post.likes.find(like => like.userId === user.id)
+        if (like) {
+          return true
+        } else {
+          return false
+        }
+      }
     }
   },
   methods: {
@@ -44,10 +67,26 @@ export default {
         const like = response.data
         const post = this.posts.find(post => post.id === like.postId)
         post.likesCount = like.post.likesCount
+        console.log(this.posts)
+        this.posts.splice()
       } catch (error) {
         console.error(error)
       }
-    }
+    },
+    async onClickDeleteLike(post) {
+      const user = this.$store.getters['getUser']
+      const like = post.likes.find(like => like.userId === user.id)
+      console.log(post, like, user)
+      try {
+        const response = await this.$axios.delete(`/posts/${post.id}/likes/${like.id}`)
+        const response2 = await this.$axios.delete(`/posts/${post.id}`)
+        const post = response2.data
+        this.posts.find(it => it.id === post.id).likesCount = post.likesCount
+        // post.likesCount = like.post.likesCount
+      } catch (error) {
+        console.error(error)
+      }
+    },
   }
 }
 </script>

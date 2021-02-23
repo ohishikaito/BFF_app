@@ -15,7 +15,9 @@ class Api::LikesController < ApplicationController
   end
 
   def destroy
-
+    like = Like.find(params[:id])
+    like.destroy
+    head :no_content
   end
 
   private

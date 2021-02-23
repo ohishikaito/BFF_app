@@ -38,8 +38,4 @@ class Post < ApplicationRecord
                       Post.is_special => :sp_post_count,
                       Post.not_is_special => nil
                   }
-
-  # def currnet_user_liked?
-  #   liked_users.include?(user_id: current_api_user) if user_signed_in?
-  # end
 end
