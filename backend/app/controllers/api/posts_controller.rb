@@ -18,7 +18,7 @@ class Api::PostsController < ApplicationController
   end
 
   def show
-    render json: @post, status: :ok
+    render json: @post, include: :user, status: :ok
   end
 
   def update

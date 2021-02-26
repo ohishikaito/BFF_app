@@ -32,5 +32,55 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  # 姓、名、メール、パスワードがあれば有効な状態であること
+  it "is valid with a first name, last name, email, and password" do
+    user = User.new(
+      first_name: "Aaron",
+      last_name:  "Sumner",
+      email:      "tester@example.com",
+      password:   "dottle-nouveau-pavilion-tights-furze",
+    )
+    expect(user).to be_valid
+  end
+  # 名がなければ無効な状態であること
+  it "is invalid without a first name" do
+    user = User.new(first_name: nil)
+    expect(user).to be_invalid
+  end
+  # 姓がなければ無効な状態であること
+  it "is invalid without a last name" do
+    user = User.new(last_name: nil)
+    expect(user).to be_invalid
+  end
+  # メールアドレスがなければ無効な状態であること
+  it "is invalid without an email address" do
+    user = User.new(email: nil)
+    expect(user).to be_invalid
+  end
+  # 重複したメールアドレスなら無効な状態であること
+  it "is invalid with a duplicate email address" do
+    user1 = User.create(
+      first_name:  "Joe",
+      last_name:  "Tester",
+      email:      "tester@example.com",
+      password:   "dottle-nouveau-pavilion-tights-furze",
+    )
+    user2 = User.create(
+      first_name:  "Joe",
+      last_name:  "Tester",
+      email:      "tester@example.com",
+      password:   "dottle-nouveau-pavilion-tights-furze",
+    )
+    expect(user2).to be_invalid
+  end
+  # ユーザーのフルネームを文字列として返すこと
+  it "returns a user's full name as a string" do
+    user = User.create(
+      first_name:  "太郎",
+      last_name:  "山田",
+      email:      "tester@example.com",
+      password:   "dottle-nouveau-pavilion-tights-furze",
+    )
+    expect(user.full_name).to eq '山田太郎'
+  end
 end
