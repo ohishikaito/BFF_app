@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_23_091417) do
+ActiveRecord::Schema.define(version: 2021_02_28_070002) do
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "post_id", null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2021_02_23_091417) do
     t.string "sub_name"
     t.boolean "is_special", default: false
     t.integer "likes_count", default: 0, null: false
+    t.string "image"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

@@ -53,6 +53,7 @@ class Api::PostsController < ApplicationController
         :sub_name,
         :is_special,
         :video,
+        :image,
       ).merge(user_id: current_api_user.id)
     end
 end

@@ -4,6 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  deleted_at  :datetime
+#  image       :string(255)
 #  is_special  :boolean          default(FALSE)
 #  likes_count :integer          default(0), not null
 #  name        :string(255)
@@ -24,6 +25,7 @@ class Post < ApplicationRecord
   validates :is_special, inclusion: { in: [true, false] }
 
   mount_uploader :video, VideoUploader
+  mount_uploader :image, ImageUploader
 
   has_many :likes
   has_many :liked_users, through: :likes, source: :user

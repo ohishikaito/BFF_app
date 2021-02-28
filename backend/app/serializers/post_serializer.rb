@@ -4,6 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  deleted_at  :datetime
+#  image       :string(255)
 #  is_special  :boolean          default(FALSE)
 #  likes_count :integer          default(0), not null
 #  name        :string(255)
@@ -24,6 +25,7 @@ class PostSerializer < ActiveModel::Serializer
     sub_name
     is_special
     video
+    image
     likes_count
     created_at
     liked_users
