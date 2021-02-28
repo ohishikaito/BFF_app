@@ -85,3 +85,6 @@ gem 'redis-rails'
 
 # is_specialカラムのカウント用
 gem 'counter_culture', '~> 2.0'
+
+# localstack s3
+gem 'fog-aws'

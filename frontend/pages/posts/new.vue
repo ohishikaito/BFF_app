@@ -15,6 +15,17 @@
       />
       <video controls ref="image0VideoUploader" :src="imgSrc"></video>
     </div> -->
+    <div>
+      image:
+      <input
+        ref="image1"
+        type="file"
+        name="image1"
+        accept="image1/*"
+        @change="setImage1"
+      />
+      <img ref="image1Uploader" :src="imgSrc">
+    </div>
     <button @click="onClickCreate">登録する</button>
   </div>
 </template>
@@ -30,19 +41,17 @@ export default {
         subName: '',
         isSpecial: false,
         image0: '',
+        image1: '',
       },
     }
   },
   methods: {
     toBlob(base64) {
-      // console.log(base64, 'base64')
       var bin = atob(base64.replace(/^.*,/, ''))
-      // console.log(bin, 'bin')
       var buffer = new Uint8Array(bin.length)
       for (var i = 0; i < bin.length; i++) {
         buffer[i] = bin.charCodeAt(i)
       }
-      // Blobを作成
       try {
         var blob = new Blob([buffer.buffer], {
           type: 'video/mp4',
@@ -59,10 +68,6 @@ export default {
       const reader = new FileReader()
       reader.onload = (e) => {
         this.imgSrc = e.target.result
-        if (this.$refs.image0VideoUploader !== undefined) {
-          // this.$refs.image0VideoUploader.src = this.imgSrc
-        }
-        // console.log(this.imgSrc, 'reader.onload = this.imgSrc')
         // this.post.image0 = this.toBlob(this.imgSrc)
         // this.post.image0 = new File(
         //   [this.$refs.image0VideoUploader.src],
@@ -72,19 +77,39 @@ export default {
       }
       const file = e.target.files[0]
       this.$refs.image0VideoUploader.src = file
-      // console.log(file, 'file')
       this.post.image0 = file
       reader.readAsDataURL(file)
       // this.post.image0 = new File([this.imgSrc], 'image0.mp4', {type: 'video/mp4'})
       // this.post.image0 = new Blob([this.imgSrc], {type: 'video/mp4'})
       // this.post.image0 = this.imgSrc
     },
+
+    setImage1(e) {
+      if (e.target.files[0] === undefined) {
+        return
+      }
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        this.imgSrc = e.target.result
+        this.post.image1 = new Blob([this.imgSrc], {type: 'image/png'})
+      }
+      reader.readAsDataURL(e.target.files[0])
+    },
+    async cropImage1() {
+      this.image1Src = this.$refs.image1Cropper.getCroppedCanvas().toDataURL()
+      this.$refs.image1Cropper.getCroppedCanvas().toBlob((blob) => {
+        this.product.image1 = blob
+      })
+      this.image1Dialog = false
+    },
+
     async onClickCreate() {
       const req = new FormData()
       req.append('name', this.post.name)
       req.append('sub_name', this.post.subName)
       req.append('is_special', this.post.isSpecial)
       req.append('video', this.post.image0)
+      req.append('image', this.post.image1)
       try {
         const response = await this.$axios.post('/posts', req, {
           headers: {
