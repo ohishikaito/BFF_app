@@ -22,6 +22,10 @@
         :src="post.video.url"
         <img :src="post.video.url">
       </li> -->
+      <li>
+        img: <img :src="post.image.url">
+        {{ post.image }}
+      </li>
     </ul>
     <button @click="onClickEdit">編集する</button>
     <button @click="onClickDestroy">削除</button>
