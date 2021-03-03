@@ -4,7 +4,9 @@ class Api::PostsController < ApplicationController
 
   def index
     # posts = cache_posts_index # NOTE: redisのキャッシュ。でも使うの微妙
-    posts = Post.includes(likes: :user).id_desc
+    # posts = Post.includes(likes: :user).id_desc
+    # posts = Post.includes(likes: :user).page(params[:page]).per(Pagination::DISPLAY_PER_PAGE).id_desc
+    posts = Post.includes(likes: :user).page(params[:page]).id_desc
     render json: posts, include: [likes: :user], status: :ok
   end
 

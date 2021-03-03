@@ -27,7 +27,10 @@ module Backend
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
     config.i18n.default_locale = :ja
+    # NOTE: 日本語化するためにlocales配下のファイルを読ませる
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
+    # NOTE: デフォルトだとlib配下を読み込まないので、読ませるように明示。eager_loadがないと定数を読み込まない。
+    config.paths.add 'lib', eager_load: true
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

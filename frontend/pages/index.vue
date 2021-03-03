@@ -31,6 +31,11 @@
         </v-col>
       </v-card>
     </ul>
+    <v-pagination
+      v-model="page"
+      :length="4"
+      circle
+    ></v-pagination>
   </v-container>
 </template>
 
@@ -44,8 +49,10 @@ export default {
   // },
   async asyncData(ctx) {
       try {
-      const response = await ctx.$axios.get('/posts')
+      const response = await ctx.$axios.get(`/posts?page=${ctx.query.page ? ctx.query.page : 1 }`)
+      // const response = await ctx.$axios.get('/posts')
       const posts = response.data
+      console.log(response.data)
       return {
         posts,
       }
