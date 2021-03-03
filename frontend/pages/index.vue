@@ -1,29 +1,35 @@
 <template>
-  <div>
+  <v-container>
     <div>
-      <nuxt-link :to="`/posts/new`">投稿</nuxt-link>
-      <nuxt-link :to="`/users`">ユーザー一覧</nuxt-link>
+      <nuxt-link :to="`/posts/new`">
+        <v-btn>投稿</v-btn>
+      </nuxt-link>
+      <nuxt-link :to="`/users`">
+        <v-btn>ユーザー一覧</v-btn>
+      </nuxt-link>
     </div>
     <h1>投稿一覧</h1>
     <ul v-for="post in posts" :key="post.id">
-      <div>
+      <v-card>
         <div>id :{{ post.id }}</div>
         <div>name :{{ post.name }}</div>
         <div>is_special :{{ post.isSpecial }}</div>
         <div>createdAt :{{ post.createdAt }}</div>
         <div>いいね数 :{{ likesCount(post) }}</div>
-        <nuxt-link :to="`/posts/${post.id}`">詳細</nuxt-link>
+        <nuxt-link :to="`/posts/${post.id}`">
+          <v-btn>詳細</v-btn>
+        </nuxt-link>
         <template v-if="authenticated">
           <template v-if="currentUserLiked(post, $store.getters['getUser'])">
-            <button @click="onClickDeleteLike(post)">いいねを取り消す</button>
+            <v-btn @click="onClickDeleteLike(post)">いいねを取り消す</v-btn>
           </template>
           <template v-else>
-            <button @click="onClickCreateLike(post)">いいね</button>
+            <v-btn @click="onClickCreateLike(post)">いいね</v-btn>
           </template>
         </template>
-      </div>
+      </v-card>
     </ul>
-  </div>
+  </v-container>
 </template>
 
 <script>

@@ -1,35 +1,24 @@
 <template>
-  <div>
-    <h1>詳細ページ</h1>
-    <ul>
-      <li>id: {{ post.id }}</li>
-      <li>name: {{ post.name }}</li>
-      <li>subName: {{ post.subName }}</li>
-      <li>is_special :{{ post.isSpecial }}</li>
-      <!-- <li>
-        video-source:
-        <video controls>
-          <source type="video/mp4" :src="post.video.url" />
-          <source type="video/mp4" src="../../../assets/test.mp4" />
-        </video>
-        video:
-        <video
-          type="video/mp4"
-          height="100"
-          width="100"
-          src="../../../assets/test.mp4"
-        ></video>
-        :src="post.video.url"
-        <img :src="post.video.url">
-      </li> -->
-      <li>
-        img: <img :src="post.image.url">
-        {{ post.image }}
-      </li>
-    </ul>
-    <button @click="onClickEdit">編集する</button>
-    <button @click="onClickDestroy">削除</button>
-  </div>
+  <v-container>
+    <v-card-title>詳細ページ</v-card-title>
+    <v-card>
+      <ul>
+        <li>id: {{ post.id }}</li>
+        <li>name: {{ post.name }}</li>
+        <li>subName: {{ post.subName }}</li>
+        <li>is_special :{{ post.isSpecial }}</li>
+        <li>
+          <v-img
+            :src="post.image.url"
+            width="300"
+            heigth="300"
+          />
+        </li>
+      </ul>
+    </v-card>
+    <v-btn @click="onClickEdit">編集する</v-btn>
+    <v-btn @click="onClickDestroy">削除</v-btn>
+  </v-container>
 </template>
 
 <script>

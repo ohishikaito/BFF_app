@@ -1,21 +1,8 @@
 <template>
-  <div>
-    <h1>編集ページ</h1>
-    <p>id: {{ post.id }}</p>
-    <div>
-      <label for="">post.name</label>
-      <input type="text" v-model="post.name" />
-    </div>
-    <div>
-      <label for="">post.subName</label>
-      <input type="text" v-model="post.subName" />
-    </div>
-    <div>
-      <label for="">post.isSpecial</label>
-      isSpecial: <input type="checkbox" v-model="post.isSpecial" />
-    </div>
-    <button @click="onClickUpdate">更新する</button>
-  </div>
+  <v-container>
+    <app-post-form :post="post"></app-post-form>
+    <v-btn @click="onClickUpdate">更新する</v-btn>
+  </v-container>
 </template>
 
 <script>
@@ -24,6 +11,7 @@ export default {
     try {
       const response = await ctx.$axios.get(`/posts/${ctx.route.params.id}`)
       const post = response.data
+      post.imageName = 'hogehoge'
       return {
         post,
       }
@@ -38,14 +26,17 @@ export default {
       req.append('name', this.post.name)
       req.append('sub_name', this.post.subName)
       req.append('is_special', this.post.isSpecial)
-      req.append('video', this.post.image0)
+      req.append('video', this.post.video)
+      if (this.post.image instanceof File) {
+        req.append('image', this.post.image)
+      }
       try {
         const response = await this.$axios.put(`/posts/${this.post.id}`, req, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         })
-        this.$router.push(`/posts/${this.post.id}`)
+        this.$router.push(`/posts/${response.data.id}`)
       } catch (error) {
         console.error(error.response)
       }
