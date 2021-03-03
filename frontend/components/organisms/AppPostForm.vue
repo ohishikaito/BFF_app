@@ -1,10 +1,12 @@
 <template>
   <v-container>
-    <v-card-title>投稿フォーム</v-card-title>
-    <v-card width="1000">
-      <v-text-field label="post.name" v-model="post.name"></v-text-field>
-      <v-text-field label="post.subName" v-model="post.subName"></v-text-field>
-      <v-checkbox label="post.isSpecial" v-model="post.isSpecial"></v-checkbox>
+    <v-card-title>post 投稿フォーム</v-card-title>
+    <v-card width="600">
+      <v-col cols="6">
+        <v-text-field label="name" v-model="post.name"></v-text-field>
+        <v-text-field label="subName" v-model="post.subName"></v-text-field>
+        <v-checkbox label="isSpecial" v-model="post.isSpecial"></v-checkbox>
+      </v-col>
       <v-img
         :src="imagePreview"
         width="300"
