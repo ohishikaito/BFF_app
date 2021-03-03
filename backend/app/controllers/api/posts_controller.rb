@@ -3,8 +3,8 @@ class Api::PostsController < ApplicationController
   before_action :set_post, only: %i[show update destroy]
 
   def index
-    # @posts = cache_posts_index # NOTE: redisのキャッシュ。でも使うの微妙
-    posts = Post.includes(likes: :user).order(id: 'DESC')
+    # posts = cache_posts_index # NOTE: redisのキャッシュ。でも使うの微妙
+    posts = Post.includes(likes: :user).id_desc
     render json: posts, include: [likes: :user], status: :ok
   end
 
@@ -36,11 +36,11 @@ class Api::PostsController < ApplicationController
 
   private
     # NOTE: 30分以内はキャッシュで同じ一覧しか返さなくなるので、あまりredisを使わないほうが良いかも
-    # def cache_posts_index
-    #   Rails.cache.fetch("posts#index", expires_in: 30.minutes) do
-    #     Post.includes(:user).order(id: 'DESC').to_a
-    #   end
-    # end
+    def cache_posts_index
+      Rails.cache.fetch("posts#index", expires_in: 30.minutes) do
+        Post.includes(likes: :user).id_desc.to_a
+      end
+    end
 
     def set_post
       @post = Post.find(params[:id])
