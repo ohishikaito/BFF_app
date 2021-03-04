@@ -1,5 +1,5 @@
 module Pagination
-  def resources_with_pagination(resources)
+  def pagination(resources)
     {
       current_page: resources.current_page,
       prev_page: resources.prev_page,

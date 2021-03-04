@@ -5,17 +5,9 @@ class Api::PostsController < ApplicationController
   def index
     # posts = cache_posts_index # NOTE: redisのキャッシュ。でも使うの微妙
     posts = Post.includes(likes: :user).page(params[:page]).id_desc
-    # adapter: :jsonつけると何故かうまくいく。理由はよく分からん。includeでネストするやつも明示できる！
-    render json: posts, meta: resources_with_pagination(posts), include: [likes: :user], status: :ok, adapter: :json
-
+    render json: posts, meta: pagination(posts), include: [likes: :user], status: :ok, adapter: :json
     # adapter: :jsonがないとserializerが反応しない
     # render json: posts, include: [likes: :user], meta: resources_with_pagination(posts), status: :ok
-
-    # rootで指定するとpostsの名前が指定したhogehogeになる
-    # render json: posts, root: "hogehoge", meta: resources_with_pagination(posts), include: [likes: :user], status: :ok, adapter: :json
-
-    # metaをpaginationとかに名前変えるとレスポンスに含まれなくなる。うーんmeta必須なのかなあ
-    # render json: posts, pagination: resources_with_pagination(posts), include: [likes: :user], status: :ok, adapter: :json
   end
 
   def create
