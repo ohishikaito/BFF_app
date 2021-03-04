@@ -37,7 +37,7 @@
       :total-visible="10"
       :color="'#17a9da'"
       circle
-      @input="onClickPaginate(pagination.nextPage)"
+      @input="onClickPaginate(pagination.currentPage)"
     ></v-pagination>
   </v-container>
 </template>
@@ -102,12 +102,12 @@ export default {
         console.error(error)
       }
     },
-    async onClickPaginate(page) {
+    async onClickPaginate(currentPage) {
       try {
-        const response = await this.$axios.get(`/posts?page=${page}`)
+        const response = await this.$axios.get(`/posts?page=${currentPage}`)
         this.posts = response.data.posts
         this.pagination = response.data.meta
-        this.$router.push(`/?page=${page}`)
+        this.$router.push(`/?page=${currentPage}`)
       } catch (error) {
         console.error(error)
       }
