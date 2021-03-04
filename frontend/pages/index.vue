@@ -32,9 +32,12 @@
       </v-card>
     </ul>
     <v-pagination
-      v-model="page"
-      :length="4"
+      v-model="pagination.currentPage"
+      :length="pagination.totalPages"
+      :total-visible="10"
+      :color="'#17a9da'"
       circle
+      @input="onClickPaginate(pagination.nextPage)"
     ></v-pagination>
   </v-container>
 </template>
@@ -50,11 +53,11 @@ export default {
   async asyncData(ctx) {
       try {
       const response = await ctx.$axios.get(`/posts?page=${ctx.query.page ? ctx.query.page : 1 }`)
-      // const response = await ctx.$axios.get('/posts')
-      const posts = response.data
-      console.log(response.data)
+      const posts = response.data.posts
+      const pagination = response.data.meta
       return {
         posts,
+        pagination,
       }
     } catch (error) {
       console.error(error)
@@ -95,6 +98,16 @@ export default {
       try {
         const response = await this.$axios.delete(`/posts/${post.id}/likes/${like.id}`)
         post.likes.splice(like, 1)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async onClickPaginate(page) {
+      try {
+        const response = await this.$axios.get(`/posts?page=${page}`)
+        this.posts = response.data.posts
+        this.pagination = response.data.meta
+        this.$router.push(`/?page=${page}`)
       } catch (error) {
         console.error(error)
       }
