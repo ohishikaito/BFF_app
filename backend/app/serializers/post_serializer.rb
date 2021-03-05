@@ -14,10 +14,6 @@
 #  updated_at  :datetime         not null
 #  user_id     :bigint
 #
-# Indexes
-#
-#  index_posts_on_user_id  (user_id)
-#
 class PostSerializer < ActiveModel::Serializer
   attributes %i[
     id
