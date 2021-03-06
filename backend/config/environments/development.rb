@@ -62,26 +62,26 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   # ---------------------------------------------------------------------
   # gmail
-  # config.action_mailer.smtp_settings = {
-  #   address:              'smtp.gmail.com',
-  #   port:                  587,
-  #   domain:               'gmail.com',
-  #   user_name:             ENV['EMAIL_ADDRESS'],
-  #   password:              ENV['EMAIL_PASSWORD'],
-  #   authentication:       'plain',
-  #   enable_starttls_auto:  true
-  # }
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                  587,
+    domain:               'gmail.com',
+    user_name:             ENV['EMAIL_ADDRESS'],
+    password:              ENV['EMAIL_PASSWORD'],
+    authentication:       'plain',
+    enable_starttls_auto:  true
+  }
   # --------------------------------------------------------------------
 
   # ---------------------------------------------------------------------
   # mailtrap
-  config.action_mailer.smtp_settings = {
-    :user_name => ENV['MAILTRAP_USER_NAME'],
-    :password => ENV['MAILTRAP_PASSWORD'],
-    :address => 'smtp.mailtrap.io',
-    :domain => 'smtp.mailtrap.io',
-    :port => '2525',
-    :authentication => :cram_md5
-  }
+  # config.action_mailer.smtp_settings = {
+  #   :user_name => ENV['MAILTRAP_USER_NAME'],
+  #   :password => ENV['MAILTRAP_PASSWORD'],
+  #   :address => 'smtp.mailtrap.io',
+  #   :domain => 'smtp.mailtrap.io',
+  #   :port => '2525',
+  #   :authentication => :cram_md5
+  # }
   # --------------------------------------------------------------------
 end
