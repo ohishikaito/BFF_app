@@ -6,11 +6,14 @@ FactoryBot.define do
     image        { '' }
     is_special   { false }
     likes_count  { 5 }
-    association  :user
+    user
 
     trait :sub_post do
       test_attribute { 'test_attribute' }
     end
-  end
 
+    trait :with_likes do
+      after(:create) { |post| create_list(:like, 5, post: post) }
+    end
+  end
 end

@@ -31,6 +31,11 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  # 記述を省略できる。e.g.）FactoryBot.create(:user)➡️create(:user)
+  config.include FactoryBot::Syntax::Methods
+  # コントローラスペックでDeviseのテストヘルパーを使用する
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

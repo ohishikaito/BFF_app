@@ -39,5 +39,5 @@ class Post < ApplicationRecord
 
   scope :id_desc, -> { order(id: 'DESC') }
 
-  attribute :test_attribute
+  attribute :test_attribute # NOTE: RSpecの勉強＆テスト用に追加した属性
 end
