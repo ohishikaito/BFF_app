@@ -38,4 +38,6 @@ class Post < ApplicationRecord
                   }
 
   scope :id_desc, -> { order(id: 'DESC') }
+
+  attribute :test_attribute
 end

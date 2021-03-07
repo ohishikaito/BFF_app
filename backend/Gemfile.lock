@@ -111,6 +111,8 @@ GEM
     factory_bot_rails (5.2.0)
       factory_bot (~> 5.2.0)
       railties (>= 4.2.0)
+    faker (2.15.1)
+      i18n (>= 1.6, < 2)
     ffi (1.13.1)
     fog-aws (3.8.0)
       fog-core (~> 2.1)
@@ -307,6 +309,7 @@ DEPENDENCIES
   devise_token_auth
   dotenv-rails
   factory_bot_rails
+  faker
   fog-aws
   graphiql-rails
   graphql
