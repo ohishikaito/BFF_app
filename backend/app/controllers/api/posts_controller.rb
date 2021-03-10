@@ -1,5 +1,5 @@
 class Api::PostsController < ApplicationController
-  before_action :authenticate_api_user!, only: %i[create show update]
+  before_action :authenticate_api_user!, only: %i[create show update destroy]
   before_action :set_post, only: %i[show update destroy]
 
   def index
