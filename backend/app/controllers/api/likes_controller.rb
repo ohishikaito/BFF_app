@@ -1,5 +1,6 @@
 class Api::LikesController < ApplicationController
   before_action :authenticate_api_user!, only: %i[create destroy]
+
   def create
     like = Like.new(like_params)
     if like.save

@@ -93,7 +93,7 @@ RSpec.describe Api::PostsController, type: :request do
 
   describe '#update' do
     let(:post) { create(:post, user: user) }
-    let(:params) { attributes_for(:post, id: post.id, name: "update_post").merge!(user_id: user.id).as_json }
+    let(:params) { attributes_for(:post, id: post.id, name: "update_post", user_id: user.id).as_json }
     let(:send_request) { patch "/api/posts/#{post.id}", params: params, headers: auth_token }
 
     context '成功' do
