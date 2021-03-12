@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::PostsController, type: :request do
-  let(:user) { create(:user) }
-  let(:auth_token) { user.create_new_auth_token }
-  let(:res) { JSON.parse(response.body) }
+  include_context 'setup'
 
   describe '#index' do
     let!(:post) { create_list(:post, 11) }

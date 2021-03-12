@@ -5,7 +5,7 @@ FactoryBot.define do
     video        { '' }
     image        { '' }
     is_special   { false }
-    likes_count  { 5 }
+    likes_count  { 0 }
     user
 
     trait :sub_post do
