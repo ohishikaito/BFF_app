@@ -28,7 +28,6 @@ class Post < ApplicationRecord
   validates :name, presence: :true
   validates :is_special, inclusion: { in: [true, false] }
 
-
   scope :is_special, -> { where(is_special: true) }
   scope :not_is_special, -> { where(is_special: false) }
   counter_culture :user,
