@@ -23,20 +23,26 @@ RSpec.describe Post, type: :model do
   end
 
   describe 'scope' do
-    before do
-      @post2 = create(:post)
-    end
-    it '正しいものが含まれて、関係ないのが含まれない' do
-      post1 = create(:post, is_special: true)
-      expect(Post.is_special).to include(post1)
-      expect(Post.is_special).to_not include(@post2)
-      expect(Post.not_is_special).to include(@post2)
-      expect(Post.not_is_special).to_not include(post1)
+    let(:post1)  { create(:post, is_special: true)}
+    let(:post2) { create(:post)}
+
+    describe 'is_special' do
+      it '正しいものが含まれて、関係ないのが含まれない' do
+        expect(Post.is_special).to include(post1)
+        expect(Post.is_special).to_not include(post2)
+      end
+
+      # scopeなのに何も返さないっておかしくねー
+      it '何も返さない' do
+        expect(Post.is_special).to be_empty
+      end
     end
 
-    # scopeなのに何も返さないっておかしくねー
-    it '何も返さない' do
-      expect(Post.is_special).to be_empty
+    describe 'not_is_special' do
+      it '正しいものが含まれて、関係ないのが含まれない' do
+        expect(Post.not_is_special).to include(post2)
+        expect(Post.not_is_special).to_not include(post1)
+      end
     end
   end
 
