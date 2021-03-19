@@ -52,9 +52,9 @@ export default {
   // },
   async asyncData(ctx) {
       try {
-      const response = await ctx.$axios.get(`/posts?page=${ctx.query.page ? ctx.query.page : 1 }`)
+      const response = await ctx.$axios.get(`/posts?page=${ctx.query.page ? ctx.query.page : 1}`)
       const posts = response.data.posts
-      const pagination = response.data.meta
+      const pagination = response.data.meta.pagination
       return {
         posts,
         pagination,

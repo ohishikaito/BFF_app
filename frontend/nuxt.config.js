@@ -1,3 +1,5 @@
+let backendEndpoint = 'http://localhost:4002/api'
+
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
@@ -28,13 +30,19 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   // ポート変更
   server: {
-    port: 3003, // デフォルト: 3000
+    port: 3004, // デフォルト: 3000
     host: '0.0.0.0', // デフォルト: localhost
   },
   modules: ['@nuxtjs/axios', '@nuxtjs/apollo', 'cookie-universal-nuxt'],
-  axios: {
-    baseURL: 'http://localhost:3004/api',
+
+  env: {
+    BACKEND_ENDPOINT: backendEndpoint,
   },
+
+  axios: {
+    baseURL: backendEndpoint,
+  },
+
   apollo: {
     clientConfigs: {
       default: '~/apollo/client-configs/default.js',

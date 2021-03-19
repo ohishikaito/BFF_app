@@ -5,9 +5,7 @@ class Api::PostsController < ApplicationController
   def index
     # posts = cache_posts_index # NOTE: redisのキャッシュ。でも使うの微妙
     posts = Post.includes(likes: :user).page(params[:page]).id_desc
-    render json: posts, meta: pagination(posts), include: [likes: :user], status: :ok, adapter: :json
-    # adapter: :jsonがないとserializerが反応しない
-    # render json: posts, include: [likes: :user], meta: resources_with_pagination(posts), status: :ok
+    render json: posts, meta: pagination(posts), include: [likes: :user], adapter: :json, status: :ok
   end
 
   def create

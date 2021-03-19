@@ -15,17 +15,24 @@
 #  user_id     :bigint
 #
 class PostSerializer < ActiveModel::Serializer
-  attributes %i[
-    id
-    name
-    sub_name
-    is_special
-    video
-    image
-    likes_count
-    created_at
-    liked_users
-  ]
+  requested_attrs = Post.column_names.map(&:to_sym)
+  requested_attrs.push(
+    :likes_count,
+    :liked_users
+  )
+  attributes(requested_attrs)
+
+  # attributes %i[
+  #   id
+  #   name
+  #   sub_name
+  #   is_special
+  #   video
+  #   image
+  #   likes_count
+  #   created_at
+  #   liked_users
+  # ]
 
   belongs_to :user
   has_many :likes
