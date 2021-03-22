@@ -15,11 +15,11 @@
 #  user_id     :bigint
 #
 class PostSerializer < ActiveModel::Serializer
-  attributes_data = Post.column_names.map(&:to_sym)
-  attributes_data.push(
+  attributes_keys = Post.column_names.map(&:to_sym)
+  attributes_keys.push(
     :liked_users
   )
-  attributes(attributes_data)
+  attributes(attributes_keys)
 
   # attributes %i[
   #   id
