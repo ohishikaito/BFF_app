@@ -93,3 +93,7 @@ gem 'fog-aws'
 
 # pagination
 gem 'kaminari'
+
+# omniauth google
+gem 'omniauth', '~> 1.9.1'
+gem 'omniauth-google-oauth2'
