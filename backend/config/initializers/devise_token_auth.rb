@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 DeviseTokenAuth.setup do |config|
+  # omniauthでうまくいかないから。cookie含めればいける？➡️いけないやーん
+  # config.cookie_enabled = false
+
   # By default the authorization headers will change after each request. The
   # client is responsible for keeping track of the changing tokens. Change
   # this to false to prevent the Authorization header from changing after
@@ -28,6 +31,9 @@ DeviseTokenAuth.setup do |config|
   # still using the same auth token.
   # config.batch_request_buffer_throttle = 5.seconds
 
+  # ＃このルートは、すべてのoauth2リダイレクトコールバックのプレフィックスになります。
+  # ＃たとえば、デフォルトの「/ omniauth」を使用すると、github oauth2プロバイダーは
+  # ＃成功した認証を「/ omniauth / github / callback」にリダイレクトします
   # This route will be the prefix for all oauth2 redirect callbacks. For
   # example, using the default '/omniauth', the github oauth2 provider will
   # redirect successful authentications to '/omniauth/github/callback'
@@ -39,6 +45,8 @@ DeviseTokenAuth.setup do |config|
   # password is updated.
   # config.check_current_password_before_update = :attributes
 
+  # ＃デフォルトでは、単一のomniauthにコールバックを使用します。
+  # ＃メール、プロバイダー、uidなどのフィールドによって異なります。
   # By default we will use callbacks for single omniauth.
   # It depends on fields like email, provider and uid.
   # config.default_callbacks = true

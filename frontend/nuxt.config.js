@@ -1,4 +1,4 @@
-let backendEndpoint = 'http://localhost:4002/api'
+let backendEndpoint = 'http://localhost:4002'
 
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
@@ -40,7 +40,7 @@ export default {
   },
 
   axios: {
-    baseURL: backendEndpoint,
+    baseURL: `${backendEndpoint}/api`,
   },
 
   apollo: {
