@@ -12,5 +12,12 @@ Rails.application.routes.draw do
       registrations: 'api/auth/registrations',
       confirmations: 'api/auth/confirmations'
     }
+    # mount_devise_token_auth_for 'AdminUser', at: 'auth'
+    # mount_devise_token_auth_for 'AdminUser', at: 'omniauth', controllers: {
+    #   omniauth_callbacks: "api/omniauth/omniauth_callbacks"
+    # }
+    devise_for :admin_users, controllers: {
+      omniauth_callbacks: "api/omniauth/omniauth_callbacks"
+    }
   end
 end
