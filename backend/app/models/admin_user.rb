@@ -31,6 +31,9 @@ class AdminUser < ApplicationRecord
          :rememberable, :validatable, :omniauthable
   # devise :omniauthable
 
-  # include DeviseTokenAuth::Concerns::User
+  # NOTE: omniauthのテストをしようとしたけど、devise_token_authの不具合かで上手くいかない。放置
+  # NOTE: responseでNo resource_class foundって言われる。issueみても解決してない。放置
+
+  include DeviseTokenAuth::Concerns::User
   # include DeviseTokenAuth::Concerns::UserOmniauthCallbacks
 end
