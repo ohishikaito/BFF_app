@@ -31,14 +31,16 @@
         </v-col>
       </v-card>
     </ul>
-    <v-pagination
-      v-model="pagination.currentPage"
-      :length="pagination.totalPages"
-      :total-visible="10"
-      :color="'#17a9da'"
-      circle
-      @input="onClickPaginate(pagination.currentPage)"
-    ></v-pagination>
+    <template v-if="posts">
+      <v-pagination
+        v-model="pagination.currentPage"
+        :length="pagination.totalPages"
+        :total-visible="10"
+        :color="'#17a9da'"
+        circle
+        @input="onClickPaginate(pagination.currentPage)"
+      ></v-pagination>
+    </template>
   </v-container>
 </template>
 

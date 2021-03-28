@@ -33,14 +33,34 @@ export default {
     port: 3004, // デフォルト: 3000
     host: '0.0.0.0', // デフォルト: localhost
   },
-  modules: ['@nuxtjs/axios', '@nuxtjs/apollo', 'cookie-universal-nuxt'],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/apollo',
+    'cookie-universal-nuxt',
+    '@nuxtjs/auth',
+  ],
 
-  env: {
-    BACKEND_ENDPOINT: backendEndpoint,
+  auth: {
+    redirect: {
+      login: '/auth/sign-in', // redirect user when not connected
+      logout: '/',
+      callback: '/auth/callback',
+      home: '/auth/mypage',
+    },
+    strategies: {
+      auth0: {
+        domain: 'dev-lsrabttj.jp.auth0.com',
+        client_id: '1AzRWTrD6G9n3TYN2zBvEmelXnKwlhd6',
+      },
+    },
   },
 
   axios: {
     baseURL: `${backendEndpoint}/api`,
+  },
+
+  env: {
+    BACKEND_ENDPOINT: backendEndpoint,
   },
 
   apollo: {

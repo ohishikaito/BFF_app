@@ -4,6 +4,11 @@ import snakeCaseKeys from 'snakecase-keys'
 export default (ctx) => {
   // リクエストログ
   ctx.$axios.onRequest((config) => {
+    // NOTE: auth0用の処理。baseUrlだけを変更したいため
+    if (config.url === 'https://dev-lsrabttj.jp.auth0.com/userinfo') {
+      config.baseUrl = 'http://localhost:3004'
+      return config
+    }
     config.headers = ctx.store.getters['getAuth']
     // NOTE: FormDataだったらすでにsnakeCaseになっているのでreturnする。何も処理しない
     if (config.data instanceof FormData) {

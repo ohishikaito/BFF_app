@@ -9,7 +9,7 @@
     </div>
     <v-btn @click="onClickSignIn">sign in</v-btn>
     <nuxt-link :to="`/auth/password`">パスワード再設定</nuxt-link>
-    <v-btn @click="onClickOmniAuth">google認証</v-btn>
+    <v-btn @click="onClickLoginWithAuth0">auth0</v-btn>
   </div>
 </template>
 
@@ -38,25 +38,32 @@ export default {
         console.error(error.response)
       }
     },
-    async onClickOmniAuth() {
+    async onClickLoginWithAuth0() {
       try {
-        // NOTE: responseでNo resource_class foundって言われる。issueみても解決してない。放置
-        const url = `https://github.com/login/oauth/authorize?response_type=code&`
-          // + `&redirect_uri=http%3A%2F%2Flocalhost%3A4002%2Flogin%2Fgithub%2Fcallback`
-          + `&redirect_uri=http%3A%2F%2Flocalhost%3A4002%2Fapi%2Flogin%2Fgithub%2Fcallback`
-          + `&scope=user%3Aemail`
-          + `&client_id=79411fede7820f04eb5f`
-          + `&state=da444026635e005dd04fa95ccc349efa29c0fa89bc2e6801`
-        window.open(url)
-
-        // const response = await this.$axios.post('omniauth/google/callback', this.user.email)
-        // this.$store.dispatch('signIn', response.headers)
-        // this.$router.push('/')
+        this.$auth.loginWith('auth0')
       } catch (error) {
-        console.log(error)
         console.error(error.response)
       }
     },
+    // async onClickOmniAuth() {
+    //   try {
+    //     // NOTE: responseでNo resource_class foundって言われる。issueみても解決してない。放置
+    //     const url = `https://github.com/login/oauth/authorize?response_type=code&`
+    //       // + `&redirect_uri=http%3A%2F%2Flocalhost%3A4002%2Flogin%2Fgithub%2Fcallback`
+    //       + `&redirect_uri=http%3A%2F%2Flocalhost%3A4002%2Fapi%2Flogin%2Fgithub%2Fcallback`
+    //       + `&scope=user%3Aemail`
+    //       + `&client_id=79411fede7820f04eb5f`
+    //       + `&state=da444026635e005dd04fa95ccc349efa29c0fa89bc2e6801`
+    //     window.open(url)
+
+    //     // const response = await this.$axios.post('omniauth/google/callback', this.user.email)
+    //     // this.$store.dispatch('signIn', response.headers)
+    //     // this.$router.push('/')
+    //   } catch (error) {
+    //     console.log(error)
+    //     console.error(error.response)
+    //   }
+    // },
   },
 }
 </script>
