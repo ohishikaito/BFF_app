@@ -40,30 +40,14 @@ export default {
     },
     async onClickOmniAuth() {
       try {
-        const baseUrl = `${process.env.BACKEND_ENDPOINT}`
-        // 環境ごとにredirect_uriを変えろ。通常ユーザーのログインもデバックする
-        const url = `https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?access_type=offline`
-          + `&client_id=958011517455-add9aab75gkv6mdkrg9o46j37opos0l8.apps.googleusercontent.com`
-
-          + `&redirect_uri=http%3A%2F%2Flocalhost%3A4002%2Fomniauth%2Fgoogle_oauth2%2Fcallback`
-          // + `&redirect_uri=http%3A%2F%2Flocalhost%3A4002%2Fomniauth%2Fgoogle_oauth2`
-          // + `&redirect_uri=http%3A%2F%2Flocalhost%3A4002%2Fauth%2Fgoogle_oauth2%2Fcallback`
-          // + `&redirect_uri=http%3A%2F%2Flocalhost%3A4002%2Fomniauth%2Fgoogle_oauth2%2Fcallback`
-          // + `&redirect_uri=http%3A%2F%2Flocalhost%3A4002%2Fapi%2Fomniauth%2Fgoogle_oauth2%2Fcallback`
-          // + `&redirect_uri=http%3A%2F%2Flocalhost%3A4002%2Fapi%2Fauth%2Fgoogle_oauth2%2Fcallback`
-          + `&response_type=code`
-          + `&scope=email`
-          // + `&state=da444026635e005dd04fa95ccc349efa29c0fa89bc2e6801`
-          + `&flowName=GeneralOAuthFlow`
+        // NOTE: responseでNo resource_class foundって言われる。issueみても解決してない。放置
+        const url = `https://github.com/login/oauth/authorize?response_type=code&`
+          // + `&redirect_uri=http%3A%2F%2Flocalhost%3A4002%2Flogin%2Fgithub%2Fcallback`
+          + `&redirect_uri=http%3A%2F%2Flocalhost%3A4002%2Fapi%2Flogin%2Fgithub%2Fcallback`
+          + `&scope=user%3Aemail`
+          + `&client_id=79411fede7820f04eb5f`
+          + `&state=da444026635e005dd04fa95ccc349efa29c0fa89bc2e6801`
         window.open(url)
-
-// https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?access_type=offline
-// &client_id=49057628444-9406cqj9722rm502tdta7vthms498a5c.apps.googleusercontent.com
-// &redirect_uri=http%3A%2F%2Flocalhost%3A4003%2Fusers%2Fauth%2Fgoogle_oauth2%2Fcallback
-// &response_type=code
-// &scope=email%20profile
-// &state=da444026635e005dd04fa95ccc349efa29c0fa89bc2e6801
-// &flowName=GeneralOAuthFlow
 
         // const response = await this.$axios.post('omniauth/google/callback', this.user.email)
         // this.$store.dispatch('signIn', response.headers)
