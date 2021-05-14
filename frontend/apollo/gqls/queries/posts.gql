@@ -2,5 +2,9 @@ query {
   posts {
     id
     name
+    subName
+    userId
+    isSpecial
+    createdAt
   }
 }

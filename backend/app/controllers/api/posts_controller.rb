@@ -1,6 +1,5 @@
 class Api::PostsController < ApplicationController
   before_action :authenticate_api_user!, only: %i[create show update destroy]
-  before_action :set_post, only: %i[show update destroy]
 
   def index
     # posts = cache_posts_index # NOTE: redisのキャッシュ。でも使うの微妙
@@ -18,20 +17,23 @@ class Api::PostsController < ApplicationController
   end
 
   def show
-    render json: @post, include: :user, status: :ok
+    post = Post.find(params[:id])
+    render json: post, include: :user, status: :ok
   end
 
   def update
-    if @post.update(post_params)
-      render json: @post, status: :ok
+    post = Post.find(params[:id])
+    if post.update(post_params)
+      render json: post, status: :ok
     else
-      render json: @post.errors, status: :unprocessable_entity
+      render json: post.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @post.destroy
-    render json: @post, status: :ok
+    post = Post.find(params[:id])
+    post.destroy
+    render json: post, status: :ok
   end
 
   private
@@ -40,10 +42,6 @@ class Api::PostsController < ApplicationController
       Rails.cache.fetch("posts#index", expires_in: 30.minutes) do
         Post.includes(likes: :user).id_desc.to_a
       end
-    end
-
-    def set_post
-      @post = Post.find(params[:id])
     end
 
     def post_params
