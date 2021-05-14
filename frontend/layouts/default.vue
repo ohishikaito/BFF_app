@@ -1,6 +1,6 @@
 <template>
   <div>
     <app-header></app-header>
-    <Nuxt />
+    <Nuxt :key="$route.params.id"/>
   </div>
 </template>

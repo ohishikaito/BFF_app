@@ -31,13 +31,12 @@
         </v-col>
       </v-card>
     </ul>
-    <template v-if="posts">
+    <template v-if="pagination">
       <v-pagination
         v-model="pagination.currentPage"
         :length="pagination.totalPages"
-        :total-visible="10"
+        :total-visible="pagination.limitValue"
         :color="'#17a9da'"
-        circle
         @input="onClickPaginate(pagination.currentPage)"
       ></v-pagination>
     </template>
@@ -45,16 +44,17 @@
 </template>
 
 <script>
-// import posts from '~/apollo/gqls/queries/posts'
+import { queryAllUsers } from '~/apollo/gqls/queries/users'
+
 export default {
-  // apollo: {
-  //   posts: {
-  //     query: posts,
-  //   },
-  // },
   async asyncData(ctx) {
       try {
-      const response = await ctx.$axios.get(`/posts?page=${ctx.query.page ? ctx.query.page : 1}`)
+      const response = await Promise.all([
+        ctx.$axios.get(`/posts?page=${ctx.query.page ? ctx.query.page : 1}`),
+        ctx.app.apolloProvider.defaultClient.query({
+          query: queryAllUsers,
+        }),
+      ])
       const posts = response.data.posts
       const pagination = response.data.meta.pagination
       return {
@@ -72,11 +72,7 @@ export default {
     currentUserLiked: () => {
       return (post, user) => {
         const like = post.likes.find(like => like.userId === user.id)
-        if (like) {
-          return true
-        } else {
-          return false
-        }
+        return like ? true : false
       }
     },
     likesCount: () => {
@@ -98,22 +94,16 @@ export default {
       const user = this.$store.getters['getUser']
       const like = post.likes.find(like => like.userId === user.id)
       try {
-        const response = await this.$axios.delete(`/posts/${post.id}/likes/${like.id}`)
+        await this.$axios.delete(`/posts/${post.id}/likes/${like.id}`)
         post.likes.splice(like, 1)
       } catch (error) {
         console.error(error)
       }
     },
-    async onClickPaginate(currentPage) {
-      try {
-        const response = await this.$axios.get(`/posts?page=${currentPage}`)
-        this.posts = response.data.posts
-        this.pagination = response.data.meta
-        this.$router.push(`/?page=${currentPage}`)
-      } catch (error) {
-        console.error(error)
-      }
+    onClickPaginate(currentPage) {
+      this.$router.push(`/?page=${currentPage}`)
     },
-  }
+  },
+  watchQuery: true,
 }
 </script>
