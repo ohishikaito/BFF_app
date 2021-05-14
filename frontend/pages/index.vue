@@ -40,26 +40,35 @@
         @input="onClickPaginate(pagination.currentPage)"
       ></v-pagination>
     </template>
+
+    <template v-for="user in users">
+      <v-card :key="user.id">
+        <div>user_id: {{ user.id }}</div>
+        <div>lastName: {{ user.lastName }}</div>
+        <div>firstName: {{ user.firstName }}</div>
+        <div>Email: {{ user.email }}</div>
+      </v-card>
+    </template>
   </v-container>
 </template>
 
 <script>
-import { queryAllUsers } from '~/apollo/gqls/queries/users'
+import { allUsers } from '~/apollo/gqls/queries/users'
 
 export default {
   async asyncData(ctx) {
       try {
       const response = await Promise.all([
         ctx.$axios.get(`/posts?page=${ctx.query.page ? ctx.query.page : 1}`),
-        ctx.app.apolloProvider.defaultClient.query({
-          query: queryAllUsers,
-        }),
+        ctx.app.apolloProvider.defaultClient.query(allUsers()),
       ])
-      const posts = response.data.posts
-      const pagination = response.data.meta.pagination
+      const posts = response[0].data.posts
+      const pagination = response[0].data.meta.pagination
+      const users = response[1].data.allUsers
       return {
         posts,
         pagination,
+        users,
       }
     } catch (error) {
       console.error(error)

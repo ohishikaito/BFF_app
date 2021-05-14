@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 
-export function queryAllUsers() {
+export function allUsers() {
   return {
     query: gql`
-      query queryAllUsers {
+      query allUsers {
         allUsers {
           id
           email
