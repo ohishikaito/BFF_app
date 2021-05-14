@@ -24,7 +24,7 @@ export default {
         lastName: '大石',
         email: 'ohishikaito@gmail.com',
         password: 'adaadaada',
-        confirm_success_url: 'http://localhost:3003/auth/completed'
+        confirm_success_url: 'http://localhost:3004/auth/completed'
       },
     }
   },
