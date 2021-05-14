@@ -1,4 +1,4 @@
-let backendEndpoint = 'http://localhost:4002'
+let backendEndpoint = 'http://localhost:13000'
 
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)

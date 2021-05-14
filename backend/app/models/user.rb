@@ -33,8 +33,14 @@
 #
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :trackable,
+         :validatable
+         #  NOTE:一旦user mail認証を止める。docker化したらエンドポイントが異なるため
+         #  :confirmable,
   include DeviseTokenAuth::Concerns::User
 
   has_many :likes
