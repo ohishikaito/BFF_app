@@ -13,6 +13,14 @@ services:
       - .:/app:cached
       - /var/tmp
       - sockets:/app/tmp/sockets
+    environment:
+      - S3_REGION=ap-northeast-1
+      - S3_ACCESS_KEY=dummy
+      - S3_SECRET_KEY=dummy
+      - S3_BUCKET=posts
+      - S3_ENDPOINT=http://localstack:4566
+      - S3_ASSET_HOST=http://localhost:4566
+    # NOTE: 秘匿情報はenvに書いてあります
     env_file:
       - .env
     depends_on:

@@ -33,6 +33,7 @@ export default {
     port: 3004, // デフォルト: 3000
     host: '0.0.0.0', // デフォルト: localhost
   },
+
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
