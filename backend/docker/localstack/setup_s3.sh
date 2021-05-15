@@ -1,1 +1,1 @@
-awslocal s3 mb s3://microposts
+awslocal s3 mb s3://posts
