@@ -5,6 +5,7 @@
 | ---- | ---- |
 | Ruby on Rails | APIサーバー |
 | 認証 | JWT(Rails gem devise_token_auth を使用) |
+| Rails test | RSpec |
 | Nuxt.js | フロントエンド |
 | MySQL | DB |
 | GraphQL, Appolo | query |
