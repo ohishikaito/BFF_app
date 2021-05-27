@@ -1,7 +1,7 @@
 下記の技術を学習するために、作成しました。
 
 # 使用技術
-| アプリ名 | port |
+| アプリ名 | 役割 |
 | ---- | ---- |
 | Ruby on Rails | APIサーバー |
 | 認証 | JWT(Rails gem devise_token_auth を使用) |
