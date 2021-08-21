@@ -28,7 +28,7 @@ jobs:
         env:
           DB_HOST: 127.0.0.1
         run: |
-          bundle exec db:migrate:reset
+          bundle exec rake db:migrate:reset
       - name: Run Rspec
         env:
           RAILS_ENV: test
