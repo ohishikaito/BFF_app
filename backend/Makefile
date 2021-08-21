@@ -3,3 +3,6 @@ attach:
 
 up:
 	docker-compose up
+
+bash:
+	docker exec -it backend_app_1 bash

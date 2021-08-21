@@ -1,0 +1,43 @@
+# test自体は通ってないけど、雰囲気はこんな感じ
+# モノレポでtestを通す方法を調べる
+# working-directory変えただけだと、↓が出る
+# /home/runner/work/_temp/daaf9521-003c-4a28-8f78-cd36e414ab69.sh: line 1: rails: command not found
+name: test
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_DATABASE: BFF_app_test
+          MYSQL_ROOT_PASSWORD: root
+          TZ: "Asia/Tokyo"
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+          bundler-cache: true
+
+      - name: Database Setup
+        working-directory: ./backend
+        env:
+          DB_HOST: 127.0.0.1
+        run: |
+          rails db:migrate:reset
+      - name: Run Rspec
+        working-directory: ./backend
+        env:
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+        run: |
+          rspec
