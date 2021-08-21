@@ -1,0 +1,37 @@
+name: test
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_DATABASE: BFF_app_test
+          MYSQL_ROOT_PASSWORD: root
+          TZ: "Asia/Tokyo"
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+          bundler-cache: true
+
+      - name: Database Setup
+        env:
+          DB_HOST: 127.0.0.1
+        run: |
+          bin/rails db:migrate:reset
+      - name: Run Rspec
+        env:
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+        run: |
+          bin/rspec
